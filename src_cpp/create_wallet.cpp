@@ -1,6 +1,6 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::create_wallet(const std::string &to_create)
+bool WalletManager::create_wallet(const std::string &to_create)
 {
     sqlite3 *db = WalletManager::init_db();
     wallet to_insert{};
@@ -10,7 +10,8 @@ std::string WalletManager::create_wallet(const std::string &to_create)
                     "initial_amount, balance, color) "
                     "VALUES (?, ?, ?, ?, ?, ?);"
     ;
-    std::string result = "Failed to create wallet!!";
+    std::string result_msg = "Failed to create wallet!!";
+    bool result = false;
 
     glz::read_json(to_insert, to_create);
     if (sqlite3_prepare_v2(db, createSQL, -1, &stmt, nullptr) != SQLITE_OK) {
@@ -27,10 +28,12 @@ std::string WalletManager::create_wallet(const std::string &to_create)
         std::cerr << "SQL step error: " << sqlite3_errmsg(db) << endl;
         goto cleanup;
     }
-    result = "Wallet created successfully!";
+    result_msg = "Wallet created successfully!";
+    result = true;
 
     cleanup:
         if (stmt) sqlite3_finalize(stmt);
         WalletManager::closedb(db);
+        cout << result_msg << endl;
         return result;
 }

@@ -1,6 +1,6 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::get_records(const std::optional<std::string> &criteria)
+std::string WalletManager::get_records(void)
 {
     sqlite3 *db = WalletManager::init_db();
     std::vector<transaction> transactionsList{};

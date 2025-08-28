@@ -16,17 +16,18 @@ int main()
     smartview.set_title("My Wallet"); // Set the window title to "Hello World!"
 
     //Exposing functions to the frontend
-    smartview.expose("record_transaction", WalletManager::record_transaction);
-    smartview.expose("record_transfer", WalletManager::record_transfer);
-    smartview.expose("create_wallet", WalletManager::create_wallet);
-    smartview.expose("update_record", WalletManager::update_record);
-    smartview.expose("update_transfer", WalletManager::update_transfer);
-    smartview.expose("update_wallet", WalletManager::update_wallet);
-    smartview.expose("get_wallets", WalletManager::get_wallets);
-    smartview.expose("get_records", WalletManager::get_records);
-    smartview.expose("delete_record", WalletManager::delete_record);
-    smartview.expose("delete_wallet", WalletManager::delete_wallet);
-    smartview.expose("delete_wallet_permanently", WalletManager::delete_wallet_permanently);
+    smartview.expose("record_transaction",        WalletManager::record_transaction       , saucer::launch::async);
+    smartview.expose("record_transfer",           WalletManager::record_transfer          , saucer::launch::async);
+    smartview.expose("restore_wallet",            WalletManager::restore_wallet           , saucer::launch::async);
+    smartview.expose("create_wallet",             WalletManager::create_wallet            , saucer::launch::async);
+    smartview.expose("update_record",             WalletManager::update_record            , saucer::launch::async);
+    smartview.expose("update_transfer",           WalletManager::update_transfer          , saucer::launch::async);
+    smartview.expose("update_wallet",             WalletManager::update_wallet            , saucer::launch::async);
+    smartview.expose("get_wallets",               WalletManager::get_wallets              , saucer::launch::async);
+    smartview.expose("get_records",               WalletManager::get_records              , saucer::launch::async);
+    smartview.expose("delete_record",             WalletManager::delete_record            , saucer::launch::async);
+    smartview.expose("delete_wallet",             WalletManager::delete_wallet            , saucer::launch::async);
+    smartview.expose("delete_wallet_permanently", WalletManager::delete_wallet_permanently, saucer::launch::async);
 
     smartview.set_url("http://localhost:5173/");
     smartview.show();                        // Show the smartview

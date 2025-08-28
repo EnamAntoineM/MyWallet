@@ -1,6 +1,6 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::update_transfer(const std::string &to_update)
+bool WalletManager::update_transfer(const std::string &to_update)
 { 
     sqlite3 *db = WalletManager::init_db();
     transaction trans_update{};
@@ -21,23 +21,28 @@ std::string WalletManager::update_transfer(const std::string &to_update)
     const char *revertNewWalletSQL = "UPDATE wallets SET balance = balance - ? WHERE name = ?;";
     const char *applyOldWalletSQL  = "UPDATE wallets SET balance = balance - ? WHERE name = ?;";
     const char *applyNewWalletSQL  = "UPDATE wallets SET balance = balance + ? WHERE name = ?;";
-    std::string result = "Failed to update transfer!!";
+    std::string result_msg = "Failed to update transfer!!";
+    bool result = false;
     
     glz::read_json(trans_update, to_update);
     if (trans_update.id <= 0) {
-        result = "Invalid transaction ID!!";
+        result_msg = "Invalid transaction ID!!";
+        result = false;
         goto cleanup;
     }
     if (trans_update.amount <= 0) {
-        result = "Transfer amount must be positive!!";
+        result_msg = "Transfer amount must be positive!!";
+        result = false;
         goto cleanup;
     }    
     if (trans_update.wallet_name.empty() || trans_update.related_wallet_name.empty()) {
-        result = "Wallet names cannot be empty!!";
+        result_msg = "Wallet names cannot be empty!!";
+        result = false;
         goto cleanup;
     }    
     if (trans_update.wallet_name == trans_update.related_wallet_name) {
-        result = "Source and destination wallets must be different!!";
+        result_msg = "Source and destination wallets must be different!!";
+        result = false;
         goto cleanup;
     }
     if (sqlite3_exec(db, "BEGIN IMMEDIATE;", nullptr, nullptr, nullptr) != SQLITE_OK) {
@@ -79,7 +84,8 @@ std::string WalletManager::update_transfer(const std::string &to_update)
     if (sqlite3_step(selectOldStmt) != SQLITE_ROW) {
         std::cerr << "Transaction not found or SQL step error: " << sqlite3_errmsg(db) << endl;
         sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
-        result = "Transaction not found!!";
+        result_msg = "Transaction not found!!";
+        result = false;
         goto cleanup;
     }    
     old_transaction.wallet_name = reinterpret_cast<const char*>(sqlite3_column_text(selectOldStmt, 0));
@@ -129,7 +135,8 @@ std::string WalletManager::update_transfer(const std::string &to_update)
         sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
         goto cleanup;
     }
-    result = "Transfer updated successfully";
+    result_msg = "Transfer updated successfully";
+    result = true;
 
     cleanup:
         if (selectOldStmt) sqlite3_finalize(selectOldStmt);
@@ -139,5 +146,6 @@ std::string WalletManager::update_transfer(const std::string &to_update)
         if (applyOldWalletStmt) sqlite3_finalize(applyOldWalletStmt);
         if (applyNewWalletStmt) sqlite3_finalize(applyNewWalletStmt);
         WalletManager::closedb(db);
+        cout << result_msg << endl;
         return result;
 }

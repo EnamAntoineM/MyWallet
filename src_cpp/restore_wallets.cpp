@@ -1,11 +1,12 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::restore_wallet(const std::string &to_restore)
+bool WalletManager::restore_wallet(const std::string &to_restore)
 {
     sqlite3 *db = WalletManager::init_db();
     sqlite3_stmt *restoreStmt = nullptr;
     sqlite3_stmt *restoreTransactionStmt = nullptr;
-    std::string result = "Failed to restore wallet!";
+    std::string result_msg = "Failed to restore wallet!";
+    bool result = false;
     
 
     const char* restoreWalletSQL = "UPDATE wallets SET is_active = TRUE WHERE name = ?;";
@@ -32,11 +33,13 @@ std::string WalletManager::restore_wallet(const std::string &to_restore)
         goto cleanup;
     }
     
-    result = "Wallet restored successfully";
+    result_msg = "Wallet restored successfully";
+    result = true;
     
 cleanup:
     if (restoreStmt) sqlite3_finalize(restoreStmt);
     if (restoreTransactionStmt) sqlite3_finalize(restoreTransactionStmt);
     WalletManager::closedb(db);
+    cout << result_msg << endl;
     return result;
 }

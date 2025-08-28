@@ -75,14 +75,14 @@ This includes:
 			<label for="my-drawer" aria-label="close sidebar"></label>
 			<ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 flex-1 gap-2 flex-col">
 				<!-- Sidebar content here -->
-				<li><a class="p-6 text-lg rounded-xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/">                <i class="mr-2 fas fa-book"></i>         Overview</a>         </li>
-				<li><a class="p-6 text-lg rounded-xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/allWallets">      <i class="mr-2 fas fa-wallet"></i>       All wallets</a>      </li>
-				<li><a class="p-6 text-lg rounded-xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/allTransactions"> <i class="mr-2 fas fa-exchange-alt"></i> All Transactions</a> </li>
-				<li><a class="p-6 text-lg rounded-xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/statistics">      <i class="mr-2 fas fa-chart-line"></i>   Statistics</a>       </li>
+				<li><a class="p-5 text-lg rounded-2xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/">                <i class="mr-2 fas fa-book"></i>         Overview</a>         </li>
+				<li><a class="p-5 text-lg rounded-2xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/allWallets">      <i class="mr-2 fas fa-wallet"></i>       All wallets</a>      </li>
+				<li><a class="p-5 text-lg rounded-2xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/allTransactions"> <i class="mr-2 fas fa-exchange-alt"></i> All Transactions</a> </li>
+				<li><a class="p-5 text-lg rounded-2xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/statistics">      <i class="mr-2 fas fa-chart-line"></i>   Statistics</a>       </li>
 				<li class="mt-auto"></li>
 				<div class="mb-16">
-					<li><a class="p-6 text-lg rounded-xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/license">     <i class="mr-2 fas fa-scale-balanced"></i>      License</a></li>
-					<li><a class="p-6 text-lg rounded-xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/aboutUs">     <i class="mr-2 fas fa-info-circle"></i>         About Us</a></li>
+					<li><a class="p-5 text-lg rounded-2xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/license">     <i class="mr-2 fas fa-scale-balanced"></i>      License</a></li>
+					<li><a class="p-5 text-lg rounded-2xl transition-all duration-580 drop-shadow-3xl max-w-64 ml-2 hover:text-yellow-500" href="#/aboutUs">     <i class="mr-2 fas fa-info-circle"></i>         About Us</a></li>
 				</div>
 			</ul>
 		</div>

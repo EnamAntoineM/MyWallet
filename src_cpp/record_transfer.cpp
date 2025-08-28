@@ -1,6 +1,6 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::record_transfer(const std::string &to_record)
+bool WalletManager::record_transfer(const std::string &to_record)
 {   
     sqlite3 *db = WalletManager::init_db();
     transaction trans_insert{};
@@ -15,7 +15,8 @@ std::string WalletManager::record_transfer(const std::string &to_record)
     ;
     const char *incomeWalletSQL = "UPDATE wallets SET balance = balance + ?  WHERE name = ?;";
     const char *withdraw_WalletSQL = "UPDATE wallets SET balance = balance - ? WHERE name = ?;";
-    std::string result = "Failed to record transfer!!";
+    std::string result_msg = "Failed to record transfer!!";
+    bool result = false;
 
     glz::read_json(trans_insert, to_record);
     if (sqlite3_exec(db, "BEGIN IMMEDIATE;", nullptr, nullptr, nullptr) != SQLITE_OK) { // <=== START TRANSACTION
@@ -74,12 +75,14 @@ std::string WalletManager::record_transfer(const std::string &to_record)
         sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
         goto cleanup;
     }
-    result = "Transfer recorded successfully";
+    result_msg = "Transfer recorded successfully";
+    result = true;
     //
     cleanup:
         if (insertTransferStmt) sqlite3_finalize(insertTransferStmt);
         if (incomeWalletStmt) sqlite3_finalize(incomeWalletStmt);
         if (withdraw_WalletStmt) sqlite3_finalize(withdraw_WalletStmt);
         WalletManager::closedb(db);
+        cout << result_msg << endl;
         return result;
 }

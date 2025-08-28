@@ -1,6 +1,6 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::record_transaction(const std::string &to_record)
+bool WalletManager::record_transaction(const std::string &to_record)
 {
     sqlite3 *db = WalletManager::init_db();
     transaction to_insert{};
@@ -14,7 +14,8 @@ std::string WalletManager::record_transaction(const std::string &to_record)
     ;
     const char *updateWalletSQL_income = "UPDATE wallets SET balance = balance + ?  WHERE name = ?;";
     const char *updateWalletSQL_expense = "UPDATE wallets SET balance = balance - ? WHERE name = ?;";
-    std::string result = "Failed to record transaction!!";
+    std::string result_msg = "Failed to record transaction!!";
+    bool result = false;
 
     glz::read_json(to_insert, to_record);
     if (sqlite3_exec(db, "BEGIN IMMEDIATE;", nullptr, nullptr, nullptr) != SQLITE_OK) { // <=== START TRANSACTION
@@ -27,7 +28,7 @@ std::string WalletManager::record_transaction(const std::string &to_record)
         sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
         goto cleanup;
     }
-    if (to_insert.type == "INCOME") {
+    if (WalletManager::caseInsensitiveCMP(to_insert.type, "INCOME")) {
         if (sqlite3_prepare_v2(db, updateWalletSQL_income, -1, &updateWalletStmt, nullptr) != SQLITE_OK) {
             std::cerr << "SQL prepare error: " << sqlite3_errmsg(db) << endl;
             sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
@@ -67,11 +68,13 @@ std::string WalletManager::record_transaction(const std::string &to_record)
         sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
         goto cleanup;
     }
-    result = "Transaction recorded successfully";
+    result_msg = "Transaction recorded successfully";
+    result = true;
     //
     cleanup:
         if (insertTransactionStmt) sqlite3_finalize(insertTransactionStmt);
         if (updateWalletStmt) sqlite3_finalize(updateWalletStmt);
         WalletManager::closedb(db);
-        return "Transaction recorded successfully!";
+        cout << result_msg << endl;
+        return result;
 }

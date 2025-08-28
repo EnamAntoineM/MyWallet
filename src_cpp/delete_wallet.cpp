@@ -1,6 +1,6 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::delete_wallet(const std::string &to_delete)
+bool WalletManager::delete_wallet(const std::string &to_delete)
 {
     sqlite3 *db = WalletManager::init_db();
     wallet toDelete{};
@@ -8,7 +8,8 @@ std::string WalletManager::delete_wallet(const std::string &to_delete)
     sqlite3_stmt *archiveTransactionsStmt = nullptr;
     const char *archiveWalletSQL = "UPDATE wallets SET is_active = FALSE WHERE name = ?;";
     const char *archiveTransactionsSQL = "UPDATE transactions SET is_archived = TRUE WHERE wallet_name = ?;";
-    std::string result = "Failed to delete record!!";
+    std::string result_msg = "Failed to delete record!!";
+    bool result = false;
 
     glz::read_json(toDelete, to_delete);
     if (sqlite3_exec(db, "BEGIN IMMEDIATE;", nullptr, nullptr, nullptr) != SQLITE_OK) { // <=== START TRANSACTION
@@ -44,10 +45,12 @@ std::string WalletManager::delete_wallet(const std::string &to_delete)
         sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
         goto cleanup;
     }
-    result = "Wallet deleted successfully";
+    result_msg = "Wallet deleted successfully";
+    result = true;
     cleanup:
         if (archiveWalletStmt) sqlite3_finalize(archiveWalletStmt);
         if (archiveTransactionsStmt) sqlite3_finalize(archiveTransactionsStmt);
         WalletManager::closedb(db);
+        cout << result_msg << endl;
         return result;
 }

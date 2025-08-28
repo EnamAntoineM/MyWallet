@@ -1,6 +1,6 @@
 #include "../include_cpp/my.h"
 
-std::string WalletManager::update_wallet(const std::string &to_update)
+bool WalletManager::update_wallet(const std::string &to_update)
 {
     sqlite3 *db = WalletManager::init_db();
     wallet to_edit{};
@@ -9,7 +9,8 @@ std::string WalletManager::update_wallet(const std::string &to_update)
                     "name = ?, currency = ?, source = ?, initial_amount = ?, "
                     "balance = ? , color = ? WHERE rowid = ?;"
     ;
-    std::string result = "Failed to update wallet!";
+    std::string result_msg = "Failed to update wallet!";
+    bool result = false;
 
     glz::read_json(to_edit, to_update);
     if (sqlite3_prepare_v2(db, updateSQL,-1 , &stmt, nullptr)!=SQLITE_OK){
@@ -29,10 +30,11 @@ std::string WalletManager::update_wallet(const std::string &to_update)
         goto cleanup;
     }
 
-    result = "Wallet updated successfully";
+    result_msg = "Wallet updated successfully";
+    result = true;
     cleanup:
-        cout << result << endl;
         if (stmt) sqlite3_finalize(stmt);
         WalletManager::closedb(db);
+        cout << result_msg << endl;
         return result;
 }

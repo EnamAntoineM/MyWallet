@@ -4,7 +4,7 @@
 /*|||||                                             [___TO DELETE INCOME AND EXPENSE RECORDS___]                                       |||||*/
     /*----------------------------------------------------------------------------------------------------------------------------------*/
 
-std::string WalletManager::delete_record(const std::string &to_delete)
+bool WalletManager::delete_record(const std::string &to_delete)
 {
     /*|||||_______________________________________________________[___VARIABLE DECLARATION___]__________________________________________________|||||*/
 
@@ -15,7 +15,8 @@ std::string WalletManager::delete_record(const std::string &to_delete)
         const char *deleteSQL = "DELETE FROM transactions WHERE id = ?;";
         const char *updateWalletSQL_forExpense = "UPDATE wallets SET balance = balance + ? WHERE name = ?";
         const char *updateWalletSQL_forIncome = "UPDATE wallets SET balance = balance - ? WHERE name = ?";
-        std::string result = "Failed to delete record";
+        std::string result_msg = "Failed to delete record";
+        bool result = false;
 
     /*|||||____________________________________________________________[_____THE END_____]______________________________________________________|||||*/
 
@@ -38,13 +39,13 @@ std::string WalletManager::delete_record(const std::string &to_delete)
             sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr); // <--- ROLLING BACK STATEMENT
             goto cleanup;
         }
-        if (toDelete.type == "INCOME") {
+        if (WalletManager::caseInsensitiveCMP(toDelete.type, "INCOME")) {
             if (sqlite3_prepare_v2(db, updateWalletSQL_forIncome, -1, &walletBalanceUpdateStmt, nullptr) != SQLITE_OK) {
                 std::cerr << "SQL prepare failed: " << sqlite3_errmsg(db) << "!!" << endl;
                 sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr); // <--- ROLLING BACK STATEMENT
                 goto cleanup;
             }
-        } else if (toDelete.type == "EXPENSE") {
+        } else if (WalletManager::caseInsensitiveCMP(toDelete.type, "EXPENSE")) {
             if (sqlite3_prepare_v2(db, updateWalletSQL_forExpense, -1, &walletBalanceUpdateStmt, nullptr) != SQLITE_OK) {
                 std::cerr << "SQL prepare failed: " << sqlite3_errmsg(db) << "!!" << endl;
                 sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr); // <--- ROLLING BACK STATEMENT
@@ -88,7 +89,8 @@ std::string WalletManager::delete_record(const std::string &to_delete)
                 sqlite3_exec(db, "ROLLBACK;", nullptr, nullptr, nullptr);
                 goto cleanup;
             }
-            result = "Record deleted successfully";
+            result_msg = "Record deleted successfully";
+            result = true;
         
 
 
@@ -97,6 +99,7 @@ std::string WalletManager::delete_record(const std::string &to_delete)
                 if (deleteStatementStmt) sqlite3_finalize(deleteStatementStmt);
                 if (walletBalanceUpdateStmt) sqlite3_finalize(walletBalanceUpdateStmt);
                 WalletManager::closedb(db);
+                cout << result_msg << endl;
                 return result;
     /*|||||_____________________________________________[_____THE END_____]_____________________________________________|||||*/
 }

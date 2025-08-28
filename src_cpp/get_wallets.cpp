@@ -5,15 +5,13 @@ std::string WalletManager::safe_column_text(sqlite3_stmt* stmt, int col) {
     return text ? reinterpret_cast<const char*>(text) : "";
 }
 
-std::string WalletManager::get_wallets(const std::optional<std::string> &criteria)
+std::string WalletManager::get_wallets(void)
 { 
     sqlite3 *db = WalletManager::init_db();
     std::vector<wallet> walletList;
     wallet pusher;
     sqlite3_stmt *stmt = nullptr;  
     std::string result;
-
-
     const char *fetchSQL = "SELECT rowid, name, currency, source, initial_amount, "
                           "balance, color, created_at, updated_at, is_active FROM wallets";
 
@@ -21,7 +19,6 @@ std::string WalletManager::get_wallets(const std::optional<std::string> &criteri
         std::cerr << "SQL prepare error: " << sqlite3_errmsg(db) << std::endl;
         goto cleanup;
     }
-
     while (sqlite3_step(stmt) == SQLITE_ROW) {
         pusher.id =             sqlite3_column_int  (stmt, 0);
         pusher.name =           safe_column_text    (stmt, 1);
@@ -35,7 +32,6 @@ std::string WalletManager::get_wallets(const std::optional<std::string> &criteri
         pusher.is_active =      sqlite3_column_int  (stmt, 9);
         walletList.push_back(pusher);
     }
-
     try {
         glz::write_json(walletList, result);
     } catch (const std::exception& error) {
