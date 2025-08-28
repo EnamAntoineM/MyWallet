@@ -55,9 +55,9 @@ This includes:
 							</div>
 						</div>
 						<ul class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-sm drop-shadow-2xl">
-							<li><button class = "p-4 text-lg rounded-2xl drop-shadow-2xl transition-all duration-580 hover:text-yellow-500">Profile</button></li>
-							<li><button class = "p-4 text-lg rounded-2xl drop-shadow-2xl transition-all duration-580 hover:text-yellow-500">Settings</button></li>
-							<li><button class = "p-4 text-lg rounded-2xl drop-shadow-2xl transition-all duration-580 hover:text-yellow-500">Logout</button></li>
+							<li><button class = "p-4 text-lg text-white rounded-2xl drop-shadow-2xl transition-all duration-580 hover:text-yellow-500">Profile</button></li>
+							<li><button class = "p-4 text-lg text-white rounded-2xl drop-shadow-2xl transition-all duration-580 hover:text-yellow-500">Settings</button></li>
+							<li><button class = "p-4 text-lg text-white rounded-2xl drop-shadow-2xl transition-all duration-580 hover:text-yellow-500">Logout</button></li>
 						</ul>
 					</div>
 				</div>
