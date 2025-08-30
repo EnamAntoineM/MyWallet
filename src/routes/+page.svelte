@@ -119,8 +119,8 @@
 		await refresh_wrap();
 		fade_alert();
 	}
-</script>
 
+</script>
 <main>
-    <p class = "font-extrabold justify-center shadow-2xl text-7xl p-64">This is the overview page</p>
+    <p class = "font-extrabold justify-center text-black border mt-6 rounded-2xl text-7xl p-64">This is the overview page</p>
 </main>

@@ -122,5 +122,5 @@
 </script>
 
 <main>
-    <p class = "font-extrabold justify-center shadow-2xl text-6xl p-64">This is the all transactions page</p>
+    <p class = "font-extrabold justify-center mt-6 border rounded-2xl text-black text-6xl p-64">This is the all transactions page</p>
 </main>

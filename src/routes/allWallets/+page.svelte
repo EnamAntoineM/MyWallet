@@ -120,81 +120,78 @@
 		fade_alert();
 	}
 </script>
+<main class="p-6 max-w-3xl mx-auto space-y-6">
+  <!-- Feedback -->
+  {#if success_popup}
+    <div class="alert alert-success">{success_popup}</div>
+  {/if}
+  {#if error_popup}
+    <div class="alert alert-error">{error_popup}</div>
+  {/if}
 
-<main>
-	<p class="font-bold justify-center shadow-2xl text-7xl p-64">
-		This is the all wallets page
-	</p>
-	<div class="flex space-x-4">
-		<div class="card bg-info-content w-60 shadow-sm">
-			<figure>
-				<img
-					src="https://img.freepik.com/premium-photo/money-wallet-cartoon-vector-icons-illustration-flat-cartoon-concept-suitable-any-creative-project_839035-1767127.jpg"
-					alt="Wallet"
-				/>
-			</figure>
-			<div class="Class body 2xl font-bold text-neutral-content p-4">
-				<h2 class="Class title 2xl font-bold">WALLET 1</h2>
-				<p>
-					A card component has a figure, a body part, and inside body
-					there are title and actions parts
-				</p>
-				<div class="card-actions justify-end">
-					<button class="btn btn-neutral">OPEN</button>
-				</div>
-			</div>
-		</div>
+  <!-- Quick controls -->
+  <div class="flex gap-2">
+    <button class="btn btn-outline" onclick={refresh_wrap}>Refresh</button>
+    <button class="btn" onclick={get_wallets_wrap}>Load wallets only</button>
+  </div>
 
-		<div class="card bg-info-content w-60 shadow-sm">
-			<figure>
-				<img
-					src="https://img.freepik.com/premium-photo/money-wallet-cartoon-vector-icons-illustration-flat-cartoon-concept-suitable-any-creative-project_839035-1767127.jpg"
-					alt="Wallet"
-				/>
-			</figure>
-			<div class="Class body 2xl font-bold text-neutral-content p-4">
-				<h2 class="Class title 2xl font-bold">WALLET 2</h2>
-				<p>
-					A card component has a figure, a body part, and inside body
-					there are title and actions parts
-				</p>
-				<div class="card-actions justify-end">
-					<button class="btn btn-neutral">OPEN</button>
-				</div>
-			</div>
-		</div>
+  <!-- Create wallet (binds directly to existing a_wallet) -->
+  <section class="card bg-base-200 p-4 space-y-3">
+    <h2 class="text-lg font-semibold">Add wallet (test)</h2>
 
-		<div class="card bg-info-content w-60 shadow-sm">
-			<figure>
-				<img
-					src="https://img.freepik.com/premium-photo/money-wallet-cartoon-vector-icons-illustration-flat-cartoon-concept-suitable-any-creative-project_839035-1767127.jpg"
-					alt="Wallet"
-				/>
-			</figure>
-			<div class="Class body 2xl font-bold text-neutral-content p-4">
-				<h2 class="Class title 2xl font-bold">WALLET 3</h2>
-				<p>
-					A card component has a figure, a body part, and inside body
-					there are title and actions parts
-				</p>
-				<div class="card-actions justify-end">
-					<button class="btn btn-neutral">OPEN</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	{#if error_popup}
-		<div
-			class="fixed top-6 right-6 z-50 px-5 py-4 bg-red-50 border border-red-700 text-black text-md rounded-2xl shadow-sm"
-		>
-			{error_popup}
-		</div>
-	{/if}
-	{#if success_popup}
-		<div
-			class="fixed top-6 right-6 z-50 px-5 py-4 bg-green-50 border border-green-700 text-black text-md rounded-2xl shadow-sm"
-		>
-			{success_popup}
-		</div>
-	{/if}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <input class="input input-bordered" placeholder="Name" bind:value={a_wallet.name} />
+      <input class="input input-bordered" placeholder="Currency" bind:value={a_wallet.currency} />
+      <input class="input input-bordered" placeholder="Source" bind:value={a_wallet.source} />
+      <input class="input input-bordered" type="number" placeholder="Initial amount" bind:value={a_wallet.initial_amount} />
+      <input class="input input-bordered" type="number" placeholder="Balance" bind:value={a_wallet.balance} />
+      <input class="input input-bordered" type="text" placeholder="Color (#hex)" bind:value={a_wallet.color} />
+    </div>
+
+    <div class="flex gap-2">
+      <button class="btn btn-primary" onclick={() => create_wallet_wrap(a_wallet)} >
+        Create wallet
+      </button>
+      <button class="btn btn-ghost" onclick={() => { 
+        // quick reset using your existing variable (no new functions)
+        a_wallet = { ...a_wallet, name: "", initial_amount: 0, balance: 0, color: "#7c3aed" }; 
+      }} >
+        Reset fields
+      </button>
+    </div>
+  </section>
+
+  <!-- Wallets list (uses existing fetched_wallets + delete_wallet_wrap) -->
+  <section class="card bg-base-200 p-4 space-y-3">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Wallets</h2>
+      <span class="badge">{fetched_wallets.length}</span>
+    </div>
+
+    {#if fetched_wallets.length === 0}
+      <p class="opacity-70">No wallets loaded. Click <b>Refresh</b> or <b>Load wallets only</b>.</p>
+    {:else}
+      <ul class="space-y-2">
+        {#each fetched_wallets as w (w.id)}
+          <li class="flex items-center justify-between p-2 bg-base-100 rounded-lg">
+            <div class="flex items-center gap-3">
+              <div class="w-4 h-4 rounded"></div>
+              <div class="flex flex-col">
+                <span class="font-medium">{w.name}</span>
+                <span class="text-xs opacity-70">{w.currency} • balance: {w.balance}</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button class="btn btn-error btn-sm" onclick={() => delete_wallet_wrap(w)} >
+                Delete (permanent)
+              </button>
+              <button class="btn btn-warning btn-sm" onclick={() => trash_wallet_wrap(w)} >
+                Trash (soft)
+              </button>
+            </div>
+          </li>
+        {/each}
+      </ul>
+    {/if}
+  </section>
 </main>
