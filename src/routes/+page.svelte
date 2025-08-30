@@ -121,6 +121,6 @@
 	}
 
 </script>
-<main>
-    <p class = "font-extrabold justify-center text-black border mt-6 rounded-2xl text-7xl p-64">This is the overview page</p>
+<main class="bg-base-100 text-base-content">
+    <p class = "font-extrabold justify-center border mt-6 rounded-2xl text-7xl p-64">This is the overview page</p>
 </main>

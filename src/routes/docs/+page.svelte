@@ -48,12 +48,11 @@
 
 <!-- PAGE ROOT: lives under your fixed navbar, readable on white -->
 <div
-  data-theme="light"
   class="docs-root relative z-0 max-w-7xl mx-auto px-4 md:px-6 pb-24 pt-[40px] text-base-content bg-base-100"
 >
   <!-- HEADER / HERO -->
-  <header class="mb-10 md:mb-12 docs-hero fx-fade">
-    <h1 class="docs-title">Wallet Tracker Documentation</h1>
+  <header class="mb-10 md:mb-12 docs-hero fx-fade bg-base-100 text-base-content">
+    <h1 class="text-5xl text-base-content font-extrabold">Wallet Tracker Documentation</h1>
     <p class="docs-subtitle">
       How to use the <strong>Svelte wrappers</strong> in your pages (with
       <code>onclick=&#123;...&#125;</code>), plus deep “why/what/how”
@@ -70,13 +69,13 @@
   </header>
 
   <!-- LAYOUT: MAIN + RIGHT TOC -->
-  <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_300px] gap-8">
+  <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_300px] gap-8 bg-base-100">
     <!-- ======================= MAIN CONTENT ======================= -->
     <main class="space-y-12">
       <!-- Guardrails -->
       <section id="guardrails" class="doc-section">
         <h2 class="doc-h2">Guardrails: IDs, timestamps &amp; UI rules</h2>
-        <div class="card bg-base-200 shadow">
+        <div class="card  shadow">
           <div class="card-body doc-prose">
             <ul>
               <li>
@@ -100,12 +99,12 @@
       </section>
 
       <!-- ================= FIELD REFERENCE (STRUCTS) ================= -->
-      <section id="field-reference" class="doc-section">
+      <section id="field-reference" class="doc-section text-base-content bg-base-100">
         <h2 class="doc-h2">Field Reference &amp; Rationale</h2>
         <p class="doc-lead">Each field’s purpose, ownership (frontend vs backend), constraints, and UI guidance. Emphasis on how values serialize to JSON and deserialize in C++.</p>
 
         <!-- Wallet -->
-        <article class="card bg-base-100 border border-base-300 mb-4">
+        <article class="card border text-base-content bg-base-100 border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">Wallet</h3>
             <div class="doc-prose">
@@ -194,7 +193,7 @@
         </article>
 
         <!-- Transaction -->
-        <article class="card bg-base-100 border border-base-300">
+        <article class="card border bg-base-100 text-base-content border-base-300">
           <div class="card-body">
             <h3 class="doc-h3">Transaction</h3>
             <div class="doc-prose">
@@ -290,7 +289,7 @@
         <h2 class="doc-h2">create_wallet_wrap(<span class="op70 text-xs">to_create: Wallet</span>)</h2>
         <p class="doc-lead">Create a wallet (no IDs in UI). The wrapper shows success/error, refreshes lists, and auto-fades banner.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -324,17 +323,17 @@
       </section>
 
       <!-- record_transaction_wrap -->
-      <section id="wrap-record" class="doc-section">
+      <section id="wrap-record" class="doc-section bg-base-100 text-base-content">
         <h2 class="doc-h2">record_transaction_wrap(<span class="op70 text-xs">to_record: Transaction</span>)</h2>
         <p class="doc-lead">Record an income/expense against a wallet. Backend applies the math; UI never shows IDs.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
-          <div class="card-body p-0">
-            <div class="codebar">
+        <div class="codecard card bg-base-100 text-base-content shadow-xl tilt3d">
+          <div class="card-body bg-base-100 text-base-content p-0">
+            <div class="codebar bg-base-100 text-base-content">
               <span>HTML (Svelte&nbsp;5)</span>
               <button class="btn btn-xs btn-ghost" onclick={handleCopyClick}>Copy</button>
             </div>
-            <div class="mockup-code text-xs">
+            <div class="mockup-code bg-base-100 text-base-content text-xs">
 <pre><code>&lt;div class="grid grid-cols-1 md:grid-cols-3 gap-2"&gt;
   &lt;input class="input input-bordered" type="number" placeholder="Amount" bind:value=&#123;a_record.amount&#125; /&gt;
   &lt;select class="select select-bordered" bind:value=&#123;a_record.type&#125;&gt;
@@ -366,7 +365,7 @@
         <h2 class="doc-h2">record_transfer_wrap(<span class="op70 text-xs">to_record: Transaction</span>)</h2>
         <p class="doc-lead">Move funds between wallets — source <code>wallet_name</code> → destination <code>related_wallet_name</code>. One atomic backend operation.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -399,7 +398,7 @@
         <h2 class="doc-h2">update_transaction_wrap(<span class="op70 text-xs">to_update: Transaction</span>)</h2>
         <p class="doc-lead">Edit a transaction you selected from a list. Backend re-diffs old vs new and adjusts balances.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -408,7 +407,7 @@
             <div class="mockup-code text-xs">
 <pre><code>&lt;!-- Show a human index (never the DB id) --&gt;
 &#123;#each fetched_transactions as t, i (t.id)&#125;
-  &lt;div class="card bg-base-100 border border-base-300 mb-2 p-3"&gt;
+  &lt;div class="card border border-base-300 mb-2 p-3"&gt;
     &lt;div class="flex items-center justify-between"&gt;
       &lt;div&gt;&lt;span class="badge mr-2"&gt;#&#123;i + 1&#125;&lt;/span&gt; &#123;t.category&#125; • &#123;t.amount&#125;&lt;/div&gt;
       &lt;button class="btn btn-accent btn-sm" onclick=&#123;() =&gt; update_transaction_wrap(t)&#125;&gt;Edit&lt;/button&gt;
@@ -432,7 +431,7 @@
         <h2 class="doc-h2">update_transfer_wrap(<span class="op70 text-xs">to_update: Transaction</span>)</h2>
         <p class="doc-lead">Edit a transfer. Backend updates both ends atomically and keeps totals coherent.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -440,7 +439,7 @@
             </div>
             <div class="mockup-code text-xs">
 <pre><code>&#123;#each fetched_transactions.filter(t =&gt; t.type === "transfer") as t, i (t.id)&#125;
-  &lt;div class="card bg-base-100 border border-base-300 mb-2 p-3"&gt;
+  &lt;div class="card border border-base-300 mb-2 p-3"&gt;
     &lt;div class="flex items-center justify-between"&gt;
       &lt;div&gt;&lt;span class="badge mr-2"&gt;#&#123;i + 1&#125;&lt;/span&gt; &#123;t.wallet_name&#125; → &#123;t.related_wallet_name&#125; • &#123;t.amount&#125;&lt;/div&gt;
       &lt;button class="btn btn-accent btn-sm" onclick=&#123;() =&gt; update_transfer_wrap(t)&#125;&gt;Edit transfer&lt;/button&gt;
@@ -464,7 +463,7 @@
         <h2 class="doc-h2">update_wallet_wrap(<span class="op70 text-xs">to_update: Wallet</span>)</h2>
         <p class="doc-lead">Edit wallet properties (never ID). Timestamps are read-only, authored by the backend.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -472,7 +471,7 @@
             </div>
             <div class="mockup-code text-xs">
 <pre><code>&#123;#each fetched_wallets as w, i (w.id)&#125;
-  &lt;div class="card bg-base-100 border border-base-300 mb-2 p-3"&gt;
+  &lt;div class="card border border-base-300 mb-2 p-3"&gt;
     &lt;div class="flex flex-wrap items-center gap-2 justify-between"&gt;
       &lt;div class="flex items-center gap-2"&gt;
         &lt;span class="badge"&gt;#&#123;i + 1&#125;&lt;/span&gt;
@@ -500,7 +499,7 @@
         <h2 class="doc-h2">restore_wallet_wrap(<span class="op70 text-xs">to_restore: Wallet</span>)</h2>
         <p class="doc-lead">Bring a trashed wallet back. Selection, not ID; same wrapper rhythm (call, refresh, fade).</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -508,7 +507,7 @@
             </div>
             <div class="mockup-code text-xs">
 <pre><code>&#123;#each fetched_wallets.filter(w =&gt; !w.is_active) as w, i (w.id)&#125;
-  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl bg-base-100"&gt;
+  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl"&gt;
     &lt;div&gt;&lt;span class="badge mr-2"&gt;#&#123;i + 1&#125;&lt;/span&gt; &#123;w.name&#125; (archived)&lt;/div&gt;
     &lt;button class="btn btn-warning btn-sm" onclick=&#123;() =&gt; restore_wallet_wrap(w)&#125;&gt;Restore&lt;/button&gt;
   &lt;/div&gt;
@@ -530,7 +529,7 @@
         <h2 class="doc-h2">trash_wallet_wrap(<span class="op70 text-xs">to_trash: Wallet</span>)</h2>
         <p class="doc-lead">Archive a wallet (reversible). Permanent removal is a different wrapper.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -538,7 +537,7 @@
             </div>
             <div class="mockup-code text-xs">
 <pre><code>&#123;#each fetched_wallets.filter(w =&gt; w.is_active) as w, i (w.id)&#125;
-  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl bg-base-100"&gt;
+  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl"&gt;
     &lt;div&gt;&lt;span class="badge mr-2"&gt;#&#123;i + 1&#125;&lt;/span&gt; &#123;w.name&#125;&lt;/div&gt;
     &lt;button class="btn btn-warning btn-sm" onclick=&#123;() =&gt; trash_wallet_wrap(w)&#125;&gt;Trash&lt;/button&gt;
   &lt;/div&gt;
@@ -560,7 +559,7 @@
         <h2 class="doc-h2">delete_wallet_wrap(<span class="op70 text-xs">to_delete: Wallet</span>)</h2>
         <p class="doc-lead"><strong>Permanent</strong> delete. Confirm with a modal. Backend may enforce referential integrity.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -568,7 +567,7 @@
             </div>
             <div class="mockup-code text-xs">
 <pre><code>&#123;#each fetched_wallets as w, i (w.id)&#125;
-  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl bg-base-100"&gt;
+  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl"&gt;
     &lt;div&gt;&lt;span class="badge mr-2"&gt;#&#123;i + 1&#125;&lt;/span&gt; &#123;w.name&#125;&lt;/div&gt;
     &lt;button class="btn btn-error btn-sm" onclick=&#123;() =&gt; delete_wallet_wrap(w)&#125;&gt;Delete&lt;/button&gt;
   &lt;/div&gt;
@@ -590,7 +589,7 @@
         <h2 class="doc-h2">delete_record_wrap(<span class="op70 text-xs">to_delete: Transaction</span>)</h2>
         <p class="doc-lead">Remove a transaction and reverse its balance effect on the backend.</p>
 
-        <div class="codecard card bg-base-200 shadow-xl tilt3d">
+        <div class="codecard card  shadow-xl tilt3d">
           <div class="card-body p-0">
             <div class="codebar">
               <span>HTML (Svelte&nbsp;5)</span>
@@ -598,7 +597,7 @@
             </div>
             <div class="mockup-code text-xs">
 <pre><code>&#123;#each fetched_transactions as t, i (t.id)&#125;
-  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl bg-base-100"&gt;
+  &lt;div class="flex items-center justify-between mb-2 p-3 border rounded-xl"&gt;
     &lt;div&gt;&lt;span class="badge mr-2"&gt;#&#123;i + 1&#125;&lt;/span&gt; &#123;t.category&#125; • &#123;t.amount&#125;&lt;/div&gt;
     &lt;button class="btn btn-error btn-sm" onclick=&#123;() =&gt; delete_record_wrap(t)&#125;&gt;Delete&lt;/button&gt;
   &lt;/div&gt;
@@ -653,7 +652,7 @@
       <!-- ================== SERIALIZATION / DESERIALIZATION ================== -->
       <section id="serde" class="doc-section">
         <h2 class="doc-h2">Serialization &amp; Deserialization — the border language</h2>
-        <div class="card bg-base-200 shadow">
+        <div class="card  shadow">
           <div class="card-body doc-prose">
             <p><strong>Serialization</strong> turns JS objects into JSON so they can cross into C++. <strong>Deserialization</strong> reconstructs C++ structs. JSON is loggable, diffable, resilient to field order, and avoids ABI pitfalls. Old servers ignore new fields; new servers default old payloads — compatibility by design.</p>
             <p><strong>Why boolean results:</strong> simple, uniform UI branches. Helpers map boolean → <code>&#123; success_popup, error_popup &#125;</code>. If you need rich errors later, return <code>&#123; ok, code, message &#125;</code> from C++ and adapt inside helpers without touching the UI.</p>
@@ -665,7 +664,7 @@
       <section id="helpers" class="doc-section">
         <h2 class="doc-h2">Core helpers in <code>$lib/index.ts</code> — deep explanations</h2>
 
-        <article id="idx-refresh" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-refresh" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">refresh()</h3>
             <div class="doc-prose">
@@ -674,7 +673,7 @@
           </div>
         </article>
 
-        <article id="idx-create" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-create" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">create_wallet(to_create: Wallet)</h3>
             <div class="doc-prose">
@@ -683,7 +682,7 @@
           </div>
         </article>
 
-        <article id="idx-record" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-record" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">record_transaction(to_record: Transaction)</h3>
             <div class="doc-prose">
@@ -692,7 +691,7 @@
           </div>
         </article>
 
-        <article id="idx-transfer" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-transfer" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">record_transfer(to_record: Transaction)</h3>
             <div class="doc-prose">
@@ -701,7 +700,7 @@
           </div>
         </article>
 
-        <article id="idx-upd-transfer" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-upd-transfer" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">update_transfer(to_update: Transaction)</h3>
             <div class="doc-prose">
@@ -710,7 +709,7 @@
           </div>
         </article>
 
-        <article id="idx-upd-record" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-upd-record" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">update_record(to_update: Transaction)</h3>
             <div class="doc-prose">
@@ -719,7 +718,7 @@
           </div>
         </article>
 
-        <article id="idx-upd-wallet" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-upd-wallet" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">update_wallet(to_update: Wallet)</h3>
             <div class="doc-prose">
@@ -728,7 +727,7 @@
           </div>
         </article>
 
-        <article id="idx-restore" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-restore" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">restore_wallet(to_restore: Wallet)</h3>
             <div class="doc-prose">
@@ -737,7 +736,7 @@
           </div>
         </article>
 
-        <article id="idx-get-wallets" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-get-wallets" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">get_wallets()</h3>
             <div class="doc-prose">
@@ -746,7 +745,7 @@
           </div>
         </article>
 
-        <article id="idx-get-records" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-get-records" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">get_records()</h3>
             <div class="doc-prose">
@@ -755,7 +754,7 @@
           </div>
         </article>
 
-        <article id="idx-trash" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-trash" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">trash_wallet(to_trash: Wallet)</h3>
             <div class="doc-prose">
@@ -764,7 +763,7 @@
           </div>
         </article>
 
-        <article id="idx-del-wallet" class="card bg-base-100 border border-base-300 mb-4">
+        <article id="idx-del-wallet" class="card border border-base-300 mb-4">
           <div class="card-body">
             <h3 class="doc-h3">delete_wallet(to_delete: Wallet)</h3>
             <div class="doc-prose">
@@ -773,7 +772,7 @@
           </div>
         </article>
 
-        <article id="idx-del-record" class="card bg-base-100 border border-base-300">
+        <article id="idx-del-record" class="card border border-base-300">
           <div class="card-body">
             <h3 class="doc-h3">delete_record(to_delete: Transaction)</h3>
             <div class="doc-prose">
@@ -786,7 +785,7 @@
       <!-- Backend contract -->
       <section id="backend" class="doc-section">
         <h2 class="doc-h2">Backend contract (Saucer → C++)</h2>
-        <div class="card bg-base-200 shadow">
+        <div class="card  shadow">
           <div class="card-body doc-prose">
             <ul>
               <li><strong>Writes:</strong> <code>(payload: string) =&gt; Promise&lt;boolean&gt;</code>.</li>
@@ -803,7 +802,7 @@
       <!-- ================== FLOW CHART (OPTIONAL) ================== -->
       <section id="flow" class="doc-section">
         <h2 class="doc-h2">How everything flows (high-level)</h2>
-        <div class="card bg-base-100 border border-base-300">
+        <div class="card border border-base-300">
           <div class="card-body">
             <div class="doc-prose">
               <p>From user actions to durable state and back to UI. The diagram emphasizes serialization at the boundary and why IDs/timestamps are backend authored.</p>
@@ -813,12 +812,12 @@
               <svg role="img" aria-label="Application flow" viewBox="0 0 1200 520" class="max-w-full">
                 <defs>
                   <style>
-                    .n { fill: #fff; stroke: #cbd5e1; stroke-width: 2; rx: 10; ry: 10; }
-                    .t { font: 14px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: #0f172a; }
-                    .a { stroke: #334155; stroke-width: 2; marker-end: url(#arrow); }
+                    .n { fill: hsl(var(--b1)); stroke: hsl(var(--b3)); stroke-width: 2; rx: 10; ry: 10; }
+                    .t { font: 14px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; fill: hsl(var(--bc)); }
+                    .a { stroke: hsl(var(--bc)); stroke-width: 2; marker-end: url(#arrow); }
                   </style>
                   <marker id="arrow" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
-                    <polygon points="0,0 10,4 0,8" fill="#334155" />
+                    <polygon points="0,0 10,4 0,8" fill="hsl(var(--bc))" />
                   </marker>
                 </defs>
 
@@ -876,7 +875,7 @@
     <!-- ======================= RIGHT TOC (sticky, high z-index) ======================= -->
     <aside class="hidden xl:block">
       <div class="sticky top-[96px] z-[6500]">
-        <div class="card bg-base-200 shadow border border-base-300">
+        <div class="card  shadow border border-base-300">
           <div class="card-body p-4">
             <h3 class="font-semibold mb-2">On this page</h3>
             <ul class="menu text-sm">
@@ -989,7 +988,7 @@
     font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.5rem);
     font-weight: 900;
     letter-spacing: -0.02em;
-    background: linear-gradient(90deg, hsl(var(--p, 262 83% 58%)), hsl(var(--s, 199 89% 48%)));
+    background: linear-gradient(90deg, hsl(var(--p)), hsl(var(--s)));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -1013,23 +1012,23 @@
   :global(.codebar) {
     display: flex; align-items: center; justify-content: space-between;
     padding: .55rem .75rem; font-size: .8rem;
-    border-bottom: 1px solid hsl(var(--b3, 210 20% 85%));
-    background: hsl(var(--b2, 0 0% 96%));
-    color: hsl(var(--bc, 222 47% 11%));
+    border-bottom: 1px solid hsl(var(--b3));
+    background: hsl(var(--b2));
+    color: hsl(var(--bc));
   }
-  :global(.codebar .btn) { color: hsl(var(--bc, 222 47% 11%)); }
+  :global(.codebar .btn) { color: hsl(var(--bc)); }
 
   :global(.mockup-code) {
-    background: hsl(var(--b1, 0 0% 100%));
-    color: hsl(var(--bc, 222 47% 11%));
-    border-top: 1px solid hsl(var(--b3, 210 20% 85%));
+    background: hsl(var(--b1));
+    color: hsl(var(--bc));
+    border-top: 1px solid hsl(var(--b3));
     border-bottom-left-radius: .5rem;
     border-bottom-right-radius: .5rem;
   }
   :global(.mockup-code pre) { overflow-x: auto; padding: 1rem 1.25rem; margin: 0; background: inherit; color: inherit; }
   :global(.mockup-code code) {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    font-size: .9rem; line-height: 1.6; color: hsl(var(--bc, 222 47% 11%)); white-space: pre;
+    font-size: .9rem; line-height: 1.6; color: hsl(var(--bc)); white-space: pre;
   }
 
   /* Subtle 3D tilt on hover */
@@ -1041,8 +1040,8 @@
   @keyframes fx-fade { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: translateY(0) } }
 
   /* Ensure readable text even without theme; keep components inheriting that color */
-  :global(.docs-root) { color: hsl(var(--bc, 222 47% 11%)); background: hsl(var(--b1, 0 0% 100%)); }
-  :global(.card), :global(.modal-box) { color: inherit; background: hsl(var(--b1, 0 0% 100%)); }
+  :global(.docs-root) { color: hsl(var(--bc)); background: hsl(var(--b1)); }
+  :global(.card), :global(.modal-box) { color: inherit; background: hsl(var(--b1)); }
 
   /* TOC: keep above page content; below your navbar (which uses a very high z) */
   :global(aside .sticky) { z-index: 6500; }

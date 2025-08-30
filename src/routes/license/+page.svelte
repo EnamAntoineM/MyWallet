@@ -13,27 +13,27 @@
 	class="flex w-full min-h-full justify-center items-center flex-col lg:pt-17 2xl:pt-35"
 >
 	<div
-		class="flex-1 max-w-3xl w-full mx-auto p-6 bg-white rounded-lg shadow-xl my-6 flex flex-col"
+		class="flex-1 max-w-3xl w-full mx-auto p-6 bg-base-100 rounded-lg shadow-2xl my-6 flex flex-col"
 	>
-		<header class="text-center border-b border-gray-200 pt-6 pb-6 mb-8">
+		<header class="text-center border-b border-base-100 pt-6 pb-6 mb-8">
 			<h1
-				class="text-4xl font-extrabold text-yellow-500 focus:text-yellow-900 mb-2"
+				class="text-4xl font-extrabold text-warning mb-2"
 			>
 				{licenseName}
 			</h1>
 		</header>
 
 		<div class="flex-1 pb-8">
-			<p class="font-semibold text-gray-800 text-center mb-3">
+			<p class="font-semibold text-base-content text-center mb-3">
 				© {copyrightYear}
 				{companyName}. All rights reserved.
 			</p>
 
 			<div
-				class="bg-gray-100 pb-6 pl-8 pr-8 rounded-l-xl shadow-md rounded-r-2xl border-l-4 border-yellow-500 whitespace-pre-wrap"
+				class="bg-base-100 pb-6 pl-8 pr-8 rounded-l-xl shadow-md rounded-r-2xl border-l-4 border-warning whitespace-pre-wrap"
 			>
 				<p
-					class="text-gray-700 text-base sm:text-lg font-medium text-justify leading-relaxed"
+					class="text-base-content sm:text-lg font-medium text-justify leading-relaxed"
 				>
 					{licenseText}
 				</p>

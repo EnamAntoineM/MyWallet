@@ -121,6 +121,6 @@
 	}
 </script>
 
-<main>
-    <p class = "font-extrabold justify-center rounded-2xl text-black border mt-6 text-7xl p-64">This is the statistics page</p>
+<main class="text-base-content bg-base-100">
+    <p class = "font-extrabold justify-center rounded-2xl border mt-6 text-7xl p-64">This is the statistics page</p>
 </main>
