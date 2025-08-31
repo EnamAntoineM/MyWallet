@@ -1,6 +1,5 @@
 
 <script lang="ts">
-  // src/routes/transactions/+page.svelte
  import type { Wallet, Transaction } from "$lib/index";
 </script>
 
