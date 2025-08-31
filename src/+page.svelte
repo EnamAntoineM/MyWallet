@@ -1,7 +1,7 @@
 
 <script lang="ts">
   // src/routes/transactions/+page.svelte
-  import AllTransactions from '$lib/AllTransactions.svelte';
+ import type { Wallet, Transaction } from "$lib/index";
 </script>
 
 <svelte:head>
