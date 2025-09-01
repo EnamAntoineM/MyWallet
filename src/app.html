@@ -8,9 +8,131 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>My Wallet</title>
+		<link rel="stylesheet" href="app.css" />
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div>%sveltekit.body%</div>
+
+            <div class="header"><div class="header-left"><a href="Settings.html" class="menu-item"><i class="fas fa-bars"></i> Settings</a>
+                <img src="lib/assets/logo.png" alt="Logo" class="logo"></div>
+				<img src="lib/assets/userPic.png" alt="User" class="user-icon">
+            </div>
+        
+        <div class="menu-bar">
+            <div class="menu-top">
+            <a href="Dashboard.html" class="menu-item active"><i class="fas fa-book"></i>&nbsp; Overview</a>
+            <a href="Settings.html" class="menu-item"><i class="fas fa-wallet"></i>&nbsp; All Wallets</a>
+            <a href="Transactions.html" class="menu-item"><i class="fas fa-exchange-alt"></i>&nbsp; Transactions</a>
+            <a href="Reports.html" class="menu-item"><i class="fas fa-chart-line"></i>&nbsp; Statistics</a>
+            
+            </div>
+            <div class="menu-bottom">
+            <hr>
+            <a href="License.html" class="menu-item"><i class="fas fa-balance-scale"></i>&nbsp;License</a>
+            <a href="About Us.html" class="menu-item"><i class="fas fa-info-circle"></i>&nbsp;About Us</a>
+            </div>
+        </div>
+        
+         <div class="container">
+           <section class="wallet-section">
+               <div class="wallet-card-header">
+                   <p>Wallets</p>
+                   <button class="Add">Add Wallet <i class="fas fa-plus"></i> </button>
+               </div>
+
+               <div class="cards">
+               <div class="wallet-card personal">
+                   <div class="card-header">
+                       <div class="card-title"><p>Personal</p><i class="fas fa-user" style="color: #6cbbf2"></i>
+                       </div>
+                      
+                   </div>
+                   <div class="card-value">$12,458.75</div>
+                   <div class="currency"><i class="fas fa-dollar-sign"> USD </i> </div>
+                    <button class="edit-button">Edit</button>
+               </div>
+               
+               <div class="wallet-card business">
+                   <div class="card-header">
+                       <div class="card-title">Business <i class="fas fa-exchange-alt" style="color: #6cbbf2"></i>
+                       </div>
+                   </div>
+                   <div class="card-value">$12,458.75</div>
+                   <div class="currency"><i class="fas fa-pound-sign"> GB </i> </div> <button class="edit-button">Edit</button>
+
+                </div>
+               
+                <div class="wallet-card Savings">
+                    <div class="card-header">
+                       <div class="card-title">Savings <i class="fas fa-piggy-bank" style="color: #6cbbf2"></i>
+                       </div>
+                   </div>
+                   
+                            <div class="card-value">$12,458.75</div>
+                   <div class="currency"><i class="fas fa-euro-sign"> EURO </i> </div> <button class="edit-button">Edit</button>
+                                 
+                        </div>
+                   </div>
+                
+
+            </section>
+            <section class="transactions">
+                <div class="transaction-header">
+                    <p>Recent Transactions</p>
+                    <button class="Add">Add Transaction <i class="fas fa-plus"></i> </button>
+                </div >
+                <table class="transaction-table">
+                 <thead> 
+    <tr>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Wallet</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+  </thead>
+  
+  <tbody> <!-- Main content -->
+    <tr>
+      <td>04/02/2025</td>
+      <td>John Doe</td>
+      <td>Marketing</td>
+      <td>$50,000</td>
+      <td>Expense</td>
+        <td><button class="edit-button">Edit</button>&nbsp;&nbsp;&nbsp;<button class="delete">Delete</button></td>
+    </tr>
+    <tr>
+      <td>04/02/2025</td>
+      <td>Jane Smith</td>
+      <td>Engineering</td>
+      <td>$75,000</td>
+        <td>Income</td>
+         <td><button class="edit-button">Edit</button>&nbsp;&nbsp;&nbsp;<button class="delete">Delete</button></td>
+    </tr>
+    <tr>
+      <td>02/04/2024</td>
+      <td>Mike Clifton</td>
+      <td>Engineering</td>
+      <td>$75,000</td>
+        <td>Expense</td>
+         <td><button class="edit-button">Edit</button>&nbsp;&nbsp;&nbsp;<button class="delete">Delete</button></td>
+    </tr>
+    <tr>
+      <td>04/02/2025</td>
+      <td>Jane Sam</td>
+      <td>Engineering</td>
+      <td>$75,000</td>
+        <td>Income</td>
+         <td><button class="edit-button">Edit</button>&nbsp;&nbsp;&nbsp;<button class="delete">Delete</button></td>
+    </tr>
+  </tbody>
+   
+</table>
+            </section>
+        </div>
+         <script src="script.js"></script>
+
 	</body>
 </html>

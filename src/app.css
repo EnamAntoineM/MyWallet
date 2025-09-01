@@ -1,2 +1,252 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+    
+}
+
+.container{
+    min-height: 100vh;
+    margin-left: 250px; 
+    padding-top: 80px;
+    width: calc(100% - 250px);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgb(7, 7, 49);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.header-left{
+    display: flex;
+}
+
+.user-icon{
+    border-radius:30px;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+}
+
+.header .menu-item {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    border-left: none !important;
+    background: none !important;
+}
+
+.header .menu-item:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.header .menu-item i {
+    margin-right: 8px;
+}
+
+.logo{
+    height: 40px;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    padding-top: 100px; 
+}
+
+.menu-bar{
+    width: 250px;
+    background: white;
+    padding: 1rem 0;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+    position: fixed;
+    left: 0;
+    top: 80px;
+    justify-content: space-between;
+    overflow-y: auto;
+    z-index: 900;
+}
+.menu-bottom hr {
+    margin: 1rem 0;
+    border: 0;
+    height: 1px;
+    background: #eee;
+}
+.menu-bottom{
+    margin-top: auto;
+    padding-bottom: 1rem;
+}
+
+.menu-bar .menu-item.active {
+    background: #e6f0ff;
+    color: #2575fc;
+    border-left: 4px solid #2575fc;
+    font-weight: 600;
+}
+
+.menu-bar .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    color: #555;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.menu-bar .menu-item:hover{
+    border-right: 4px solid #2575fc;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.wallet-card-header{
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+.wallet-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.wallet-card.personal,
+.wallet-card.business,
+.wallet-card.Savings {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #6cbbf2;
+    min-width: 280px;}
+
+.card-header {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-title{
+    display: flex;
+    justify-content: space-between
+}
+
+.fa-user {
+    color: #6a11cb;
+}
+
+.card-value{
+    display: flex;
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.7);
+    padding-top: 15px 0;
+    margin-bottom: 10px;
+}
+
+.currency{
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+
+.edit-button {
+    background: #2575fc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.edit-button:hover{
+    background-color: darkblue;
+}
+
+.Add {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.transaction-header{
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 5px 20px;
+}
+
+.delete {
+    background-color: tomato;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete:hover{
+    background-color: darkred;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+td:hover {
+  background-color: #f5f5f5;
+}
+
