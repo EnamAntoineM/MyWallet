@@ -1,7 +1,8 @@
 <script lang="ts">
-	import EmmaPic from "$lib/assets/Emma (Edited).jpg";
-	import EnamPic from "$lib/assets/EnamPic (Edited).jpg";
-	import JosephPic from "$lib/assets/Joseph.jpg";
+	import EmmaPic from "$lib/assets/Emma.jpg?inline";
+	import EnamPic from "$lib/assets/Enam.jpg?inline";
+	import JosephPic from "$lib/assets/Joseph.jpg?inline";
+	import BgPic from "$lib/assets/Background.jpg?inline";
 </script>
 
 <main>
@@ -9,7 +10,7 @@
 		<!-- Background image and blur overlay as background layer -->
 		<div
 			class="absolute inset-0 z-0"
-			style="background-image: url('/src/lib/assets/Background fill.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; animate-bounce"
+			style={`background-image: url('${BgPic}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
 		>
 			<div class="absolute inset-0 bg-base-100/80"></div>
 		</div>

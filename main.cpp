@@ -1,5 +1,6 @@
 #include <saucer/smartview.hpp>
 #include "include_cpp/my.h"
+#include "embedded/all.hpp"
 
 using std::string;
 
@@ -29,7 +30,8 @@ int main()
     smartview.expose("delete_wallet",             WalletManager::delete_wallet            , saucer::launch::async);
     smartview.expose("delete_wallet_permanently", WalletManager::delete_wallet_permanently, saucer::launch::async);
 
-    smartview.set_url("http://localhost:5173/");
+    smartview.embed(saucer::embedded::all());
+    smartview.serve("index.html");
     smartview.show();                        // Show the smartview
     
     app->run();                             // And finally enter the run-loop.

@@ -7,6 +7,9 @@ node_modules
 .wrangler
 /.svelte-kit
 /.idea
+/embedded
+/myWallet
+/output
 
 /build
 /.vscode

@@ -46,5 +46,5 @@ if (!MSVC)
     )
     target_compile_options(${PROJECT_NAME} PRIVATE ${MY_PERFORMANCE_FLAGS})
 endif()
-
+target_include_directories(${PROJECT_NAME} PRIVATE "embedded")
 target_link_libraries(${PROJECT_NAME} PRIVATE saucer::saucer SQLite::SQLite3)

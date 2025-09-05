@@ -1,9 +1,9 @@
 <!-- Base layout for the application -->
 <script lang="ts">
 	import "../app.css";
-	import appIcon from "$lib/assets/icon.png";
-	import userPic from "$lib/assets/userPic.png";
-	import appLogo from "$lib/assets/logo.png";
+	import appIcon from "$lib/assets/icon.png?inline";
+	import userPic from "$lib/assets/userPic.png?inline";
+	import appLogo from "$lib/assets/logo.png?inline";
 
 	const themes = [
 		"light",
