@@ -88,7 +88,9 @@
 								</div>
 								<div class="flex mt-4 text-lg mb-2">
 									<p class="font-bold">Balance:</p>
-									<div class="ml-auto flex font-semibold mr-4 gap-x-2">
+									<div
+										class="ml-auto flex font-semibold mr-4 gap-x-2"
+									>
 										<p>{delWallet.currency}</p>
 										<p>{delWallet.balance}</p>
 									</div>
@@ -98,14 +100,17 @@
 								>
 									<button
 										class="btn rounded-2xl hover:bg-error hover:border-error"
-										onclick={() => delete_wallet_wrap(delWallet)}
-										>Delete</button
+										onclick={() =>
+											delete_wallet_wrap(delWallet)}
 									>
+										Delete
+									</button>
 									<button
 										class="btn rounded-2xl hover:bg-success hover:border-success"
 										onclick={() =>
 											restore_wallet_wrap(delWallet)}
-										>Restore</button
+									>
+										Restore</button
 									>
 								</div>
 							</div>
