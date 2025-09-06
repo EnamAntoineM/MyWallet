@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Wallet, Transaction } from "$lib/index";
+	import type { Wallet, Transaction } from '$lib';
 	import {
 		get_wallets,
 		delete_wallet,
 		restore_wallet,
 		refresh,
-	} from "$lib/index";
+	} from '$lib';
 	import { onMount } from "svelte";
 
 	let a_wallet: Wallet = $state({
@@ -75,7 +75,7 @@
 				{#each fetched_wallets as delWallet}
 					{#if !delWallet.is_active}
 						<div
-							class="card bg-primary/60 text-primary-content w-96"
+							class="card !bg-primary/60 text-primary-content w-96"
 						>
 							<div class="card-body">
 								<div class="flex">
@@ -98,8 +98,7 @@
 								>
 									<button
 										class="btn rounded-2xl hover:bg-error hover:border-error"
-										onclick={() => delete_wallet_wrap(delWallet)}
-										>Delete</button
+										onclick={() => delete_wallet_wrap(delWallet)}>Delete</button
 									>
 									<button
 										class="btn rounded-2xl hover:bg-success hover:border-success"
