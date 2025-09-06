@@ -47,7 +47,7 @@
 	let fetched_transactions: Transaction[] = $state([]);
 
 	onMount(async () => refresh_wrap());
-	
+
 	function fade_alert() {
 		setTimeout(() => {
 			success_popup = "";
@@ -62,6 +62,7 @@
 	}
 
 	async function create_wallet_wrap(to_create: Wallet) {
+		to_create.color = "bg-" + to_create.color;
 		({ success_popup, error_popup } = await create_wallet(to_create));
 		await refresh_wrap();
 		fade_alert();
@@ -110,7 +111,8 @@
 
 	async function get_records_wrap() {
 		fetched_transactions = await get_records();
-		if (fetched_transactions.length === 0) error_popup = "No transactions found";
+		if (fetched_transactions.length === 0)
+			error_popup = "No transactions found";
 	}
 
 	async function trash_wallet_wrap(to_trash: Wallet) {
@@ -132,7 +134,9 @@
 	}
 </script>
 
-<main class="min-h-screen p-6 max-w-3xl mx-auto space-y-6 bg-base-100 text-base-content">
+<main
+	class="min-h-screen p-6 max-w-3xl mx-auto space-y-6 bg-base-100 text-base-content"
+>
 	<!-- Feedback -->
 	{#if success_popup}
 		<div class="alert alert-success">{success_popup}</div>
@@ -144,7 +148,8 @@
 	<!-- Quick controls -->
 	<div class="flex gap-2">
 		<button class="btn btn-outline" onclick={refresh_wrap}>Refresh</button>
-		<button class="btn" onclick={get_wallets_wrap}>Load wallets only</button>
+		<button class="btn" onclick={get_wallets_wrap}>Load wallets only</button
+		>
 	</div>
 
 	<!-- Create wallet -->
@@ -152,21 +157,60 @@
 		<h2 class="text-lg font-extrabold">Add wallet (test)</h2>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-			<input class="input input-bordered" placeholder="Name" bind:value={a_wallet.name} />
-			<input class="input input-bordered" placeholder="Currency" bind:value={a_wallet.currency} />
-			<input class="input input-bordered" placeholder="Source" bind:value={a_wallet.source} />
-			<input class="input input-bordered" type="number" placeholder="Initial amount" bind:value={a_wallet.initial_amount} />
-			<input class="input input-bordered" type="number" placeholder="Balance" bind:value={a_wallet.balance} />
-			<input class="input input-bordered" type="text" placeholder="Color (#hex)" bind:value={a_wallet.color} />
+			<input
+				class="input input-bordered"
+				placeholder="Name"
+				bind:value={a_wallet.name}
+			/>
+			<input
+				class="input input-bordered"
+				placeholder="Currency"
+				bind:value={a_wallet.currency}
+			/>
+			<input
+				class="input input-bordered"
+				placeholder="Source"
+				bind:value={a_wallet.source}
+			/>
+			<input
+				class="input input-bordered"
+				type="number"
+				placeholder="Initial amount"
+				bind:value={a_wallet.initial_amount}
+			/>
+			<input
+				class="input input-bordered"
+				type="number"
+				placeholder="Balance"
+				bind:value={a_wallet.balance}
+			/>
+			<input
+				class="input input-bordered"
+				type="text"
+				placeholder="Color (#hex)"
+				bind:value={a_wallet.color}
+			/>
 		</div>
 
 		<div class="flex gap-2 mt-3">
-			<button class="btn btn-primary" onclick={() => create_wallet_wrap(a_wallet)}>
+			<button
+				class="btn btn-primary"
+				onclick={() => create_wallet_wrap(a_wallet)}
+			>
 				Create wallet
 			</button>
-			<button class="btn btn-ghost" onclick={() => { 
-				a_wallet = { ...a_wallet, name: "", initial_amount: 0, balance: 0, color: "#7c3aed" }; 
-			}}>
+			<button
+				class="btn btn-ghost"
+				onclick={() => {
+					a_wallet = {
+						...a_wallet,
+						name: "",
+						initial_amount: 0,
+						balance: 0,
+						color: "#7c3aed",
+					};
+				}}
+			>
 				Reset fields
 			</button>
 		</div>
@@ -180,27 +224,45 @@
 		</div>
 
 		{#if fetched_wallets.length === 0}
-			<p class="opacity-70">No wallets loaded. Click <b>Refresh</b> or <b>Load wallets only</b>.</p>
+			<p class="opacity-70">
+				No wallets loaded. Click <b>Refresh</b> or
+				<b>Load wallets only</b>.
+			</p>
 		{:else}
 			<ul class="space-y-2">
 				{#each fetched_wallets as w (w.id)}
-					<li class="flex items-center justify-between p-2 rounded-lg bg-base-200">
-						<div class="flex items-center gap-3">
-							<div class="w-4 h-4 rounded" style="background-color: {w.color}"></div>
-							<div class="flex flex-col">
-								<span class="font-medium">{w.name}</span>
-								<span class="text-xs opacity-70">{w.currency} • balance: {w.balance}</span>
+					{#if w.is_active}
+						<li
+							class="flex items-center justify-between p-2 rounded-lg bg-base-200"
+						>
+							<div class="flex items-center gap-3">
+								<div
+									class="w-4 h-4 rounded"
+									style="background-color: {w.color}"
+								></div>
+								<div class="flex flex-col">
+									<span class="font-medium">{w.name}</span>
+									<span class="text-xs opacity-70"
+										>{w.currency} • balance: {w.balance}</span
+									>
+								</div>
 							</div>
-						</div>
-						<div class="flex gap-2">
-							<button class="btn btn-error btn-sm" onclick={() => delete_wallet_wrap(w)}>
-								Delete (permanent)
-							</button>
-							<button class="btn btn-warning btn-sm" onclick={() => trash_wallet_wrap(w)}>
-								Trash (soft)
-							</button>
-						</div>
-					</li>
+							<div class="flex gap-2">
+								<button
+									class="btn btn-error btn-sm"
+									onclick={() => delete_wallet_wrap(w)}
+								>
+									Delete (permanent)
+								</button>
+								<button
+									class="btn btn-warning btn-sm"
+									onclick={() => trash_wallet_wrap(w)}
+								>
+									Trash (soft)
+								</button>
+							</div>
+						</li>
+					{/if}
 				{/each}
 			</ul>
 		{/if}

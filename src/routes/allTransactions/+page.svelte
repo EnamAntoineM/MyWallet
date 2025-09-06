@@ -48,11 +48,6 @@
 		fetched_wallets = wallets;
 		fetched_transactions = records;
 	}
-	async function create_wallet_wrap(to_create: Wallet) {
-		({ success_popup, error_popup } = await create_wallet(to_create));
-		await refresh_wrap();
-		fade_alert();
-	}
 	async function record_transaction_wrap(to_record: Transaction) {
 		({ success_popup, error_popup } = await record_transaction(to_record));
 		await refresh_wrap();
@@ -76,16 +71,6 @@
 		await refresh_wrap();
 		fade_alert();
 	}
-	async function update_wallet_wrap(to_update: Wallet) {
-		({ success_popup, error_popup } = await update_wallet(to_update));
-		await refresh_wrap();
-		fade_alert();
-	}
-	async function restore_wallet_wrap(to_restore: Wallet) {
-		({ success_popup, error_popup } = await restore_wallet(to_restore));
-		await refresh_wrap();
-		fade_alert();
-	}
 	async function get_wallets_wrap() {
 		fetched_wallets = await get_wallets();
 		if (fetched_wallets.length === 0) error_popup = "No wallets found";
@@ -94,16 +79,6 @@
 		fetched_transactions = await get_records();
 		if (fetched_transactions.length === 0)
 			error_popup = "No transactions found";
-	}
-	async function trash_wallet_wrap(to_trash: Wallet) {
-		({ success_popup, error_popup } = await trash_wallet(to_trash));
-		await refresh_wrap();
-		fade_alert();
-	}
-	async function delete_wallet_wrap(to_delete: Wallet) {
-		({ success_popup, error_popup } = await delete_wallet(to_delete));
-		await refresh_wrap();
-		fade_alert();
 	}
 	async function delete_record_wrap(to_delete: Transaction) {
 		({ success_popup, error_popup } = await delete_record(to_delete));
@@ -199,15 +174,15 @@
 </script>
 
 <main class="min-h-screen p-6 mx-auto space-y-6 bg-base-100 text-base-content">
-	<div class="">
+	<div>
 		{#if success_popup}<div class="alert alert-success">
 				{success_popup}
 			</div>{/if}
 		{#if error_popup}<div class="alert alert-error">{error_popup}</div>{/if}
 	</div>
 
-	<div class="flex justify-between items-center mb-6">
-		<h1 class="text-3xl font-bold text-base-content">
+	<div class="flex justify-between items-center mb-10">
+		<h1 class="text-4xl font-bold text-base-content">
 			Transaction Management
 		</h1>
 		<button
@@ -339,25 +314,25 @@
 			<table class="w-full">
 				<thead class="bg-warning/30 text-base-content/80">
 					<tr>
-						<th class="px-8 py-3 text-left text-sm font-medium"
+						<th class="px-8 py-3 text-left text-sm font-bold"
 							>Date</th
 						>
-						<th class="px-4 py-3 text-left text-sm font-medium"
+						<th class="px-4 py-3 text-left text-sm font-bold"
 							>Wallet</th
 						>
-						<th class="px-4 py-3 text-left text-sm font-medium"
+						<th class="px-4 py-3 text-left text-sm font-bold"
 							>Type</th
 						>
-						<th class="px-4 py-3 text-left text-sm font-medium"
+						<th class="px-4 py-3 text-left text-sm font-bold"
 							>Category</th
 						>
-						<th class="px-4 py-3 text-left text-sm font-medium"
+						<th class="px-4 py-3 text-left text-sm font-bold"
 							>Description</th
 						>
-						<th class="px-4 py-3 text-left text-sm font-medium"
+						<th class="px-4 py-3 text-left text-sm font-bold"
 							>Amount</th
 						>
-						<th class="px-4 py-3 text-left text-sm font-medium"
+						<th class="px-4 py-3 text-left text-sm font-bold"
 							>Actions</th
 						>
 					</tr>
@@ -466,7 +441,30 @@
 									{transaction.category}
 								</td>
 								<td class="px-4 py-3 text-sm text-base-content">
-									{transaction.description}
+									<label for="description_modal" class="btn outline-none bg-transparent border-none max-w-46 font-normal justify-start truncate">
+										{transaction.description}
+									</label>
+									<input
+										type="checkbox"
+										id="description_modal"
+										class="modal-toggle"
+									/>
+									<div class="modal" role="dialog">
+										<div class="modal-box">
+											<h3 class="text-2xl font-bold">
+												Description
+											</h3>
+											<p class="py-4">
+												{transaction.description}
+											</p>
+											<div class="modal-action mt-0">
+												<label
+													for="description_modal"
+													class="btn">Close</label
+												>
+											</div>
+										</div>
+									</div>
 								</td>
 								<td class="px-4 py-3 text-sm font-medium">
 									<span

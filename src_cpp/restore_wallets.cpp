@@ -3,15 +3,15 @@
 bool WalletManager::restore_wallet(const std::string &to_restore)
 {
     sqlite3 *db = WalletManager::init_db();
+    wallet toRestore{};
     sqlite3_stmt *restoreStmt = nullptr;
     sqlite3_stmt *restoreTransactionStmt = nullptr;
     std::string result_msg = "Failed to restore wallet!";
     bool result = false;
-    
-
     const char* restoreWalletSQL = "UPDATE wallets SET is_active = TRUE WHERE name = ?;";
-    const char* restoreRelatedTransactionsSQL = "UPDATE transactions SET is_archived = FALSE WHERE name = ?;";
+    const char* restoreRelatedTransactionsSQL = "UPDATE transactions SET is_archived = FALSE WHERE wallet_name = ?;";
     
+    glz::read_json(toRestore, to_restore);
     if (sqlite3_prepare_v2(db, restoreWalletSQL, -1, &restoreStmt, nullptr) != SQLITE_OK) {
         std::cerr << "SQL prepare error: " << sqlite3_errmsg(db) << std::endl;
         goto cleanup;
@@ -20,10 +20,8 @@ bool WalletManager::restore_wallet(const std::string &to_restore)
         std::cerr << "SQL prepare error: " << sqlite3_errmsg(db) << std::endl;
         goto cleanup;
     }
-    
-    sqlite3_bind_text(restoreStmt, 1, to_restore.c_str(), -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(restoreTransactionStmt, 1, to_restore.c_str(), -1, SQLITE_TRANSIENT);
-    
+    sqlite3_bind_text(restoreStmt, 1, toRestore.name.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(restoreTransactionStmt, 1, toRestore.name.c_str(), -1, SQLITE_TRANSIENT);
     if (sqlite3_step(restoreStmt) != SQLITE_DONE) {
         std::cerr << "Failed to complete the query: " << sqlite3_errmsg(db) << std::endl;
         goto cleanup;
@@ -32,7 +30,6 @@ bool WalletManager::restore_wallet(const std::string &to_restore)
         std::cerr << "Failed to complete the query: " << sqlite3_errmsg(db) << std::endl;
         goto cleanup;
     }
-    
     result_msg = "Wallet restored successfully";
     result = true;
     

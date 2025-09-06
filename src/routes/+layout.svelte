@@ -207,10 +207,10 @@
 				</li>
 				<li>
 					<a
-						class="p-5 text-lg text-error rounded-2xl transition-all shadow-sm duration-580 drop-shadow-3xl border border-base-300 bg-base-100 font-bold max-w-64 ml-2 hover:text-warning hover:shadow-xl hover:bg-base-200"
-						href="#/docs"
+						class="p-5 text-lg text-error/70 rounded-2xl transition-all shadow-sm duration-580 drop-shadow-3xl border border-base-300 bg-base-100 font-bold max-w-64 ml-2 hover:text-error hover:shadow-xl hover:bg-base-200"
+						href="#/recyclebin"
 					>
-						<i class="mr-2 fas fa-circle-exclamation"></i> DOCUMENTATION</a
+						<i class="mr-2 fas fa-trash"></i> Recycle Bin</a
 					>
 				</li>
 				<li class="mt-auto"></li>
