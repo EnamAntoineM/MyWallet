@@ -5,16 +5,10 @@
 	import BgPic from "$lib/assets/Background.jpg?inline";
 </script>
 
-<main>
+<main class="relative w-full bg-cover bg-center bg-no-repeat min-h-screen"
+	style={`background-image: url(${BgPic});`}>
+	<div class="absolute inset-0 bg-base-100/80 min-h-screen"></div>
 	<div class="shadow-lg overflow-hidden">
-		<!-- Background image and blur overlay as background layer -->
-		<div
-			class="absolute inset-0 z-0"
-			style={`background-image: url('${BgPic}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
-		>
-			<div class="absolute inset-0 bg-base-100/80"></div>
-		</div>
-
 		<!-- All content sits above the overlay -->
 		<div class="relative z-10 mt-16 mb-10">
 			<div class="justify-center">
