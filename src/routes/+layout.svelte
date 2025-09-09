@@ -66,7 +66,7 @@
 		<div class="drawer-content h-screen bg-base-100">
 			<!-- Page content here -->
 			<div
-				class="navbar shadow-sm fixed z-[5000] top-0 left-0 right-0 rounded-b-sm bg-base-100"
+				class="navbar shadow-sm sticky z-[5000] top-0 left-0 right-0 rounded-b-sm bg-base-100"
 			>
 				<div class="flex-1 bg-base-100">
 					<div class="flex max-w-56 bg-base-100">
@@ -158,7 +158,7 @@
 			</div>
 
 			<div
-				class="transition-all duration-400 p-2 overflow-auto mt-11 bg-base-100"
+				class="transition-all duration-400 p-2 bg-base-100"
 				class:ml-[320px]={!active}
 				class:ml-[0px]={active}
 			>
