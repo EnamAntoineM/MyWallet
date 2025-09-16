@@ -22,7 +22,6 @@ int main()
     smartview.expose("restore_wallet",            WalletManager::restore_wallet           , saucer::launch::async);
     smartview.expose("create_wallet",             WalletManager::create_wallet            , saucer::launch::async);
     smartview.expose("update_record",             WalletManager::update_record            , saucer::launch::async);
-    smartview.expose("update_transfer",           WalletManager::update_transfer          , saucer::launch::async);
     smartview.expose("update_wallet",             WalletManager::update_wallet            , saucer::launch::async);
     smartview.expose("get_wallets",               WalletManager::get_wallets              , saucer::launch::async);
     smartview.expose("get_records",               WalletManager::get_records              , saucer::launch::async);

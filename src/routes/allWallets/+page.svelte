@@ -6,7 +6,6 @@
 		record_transfer,
 		update_record,
 		update_wallet,
-		update_transfer,
 		get_wallets,
 		get_records,
 		delete_record,
@@ -82,12 +81,6 @@
 
 	async function update_transaction_wrap(to_update: Transaction) {
 		({ success_popup, error_popup } = await update_record(to_update));
-		await refresh_wrap();
-		fade_alert();
-	}
-
-	async function update_transfer_wrap(to_update: Transaction) {
-		({ success_popup, error_popup } = await update_transfer(to_update));
 		await refresh_wrap();
 		fade_alert();
 	}

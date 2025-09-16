@@ -4,9 +4,6 @@
 		record_transaction,
 		record_transfer,
 		update_record,
-		update_transfer,
-		get_wallets,
-		get_records,
 		delete_record,
 		refresh,
 	} from "$lib/index";

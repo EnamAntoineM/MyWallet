@@ -72,17 +72,6 @@ export async function record_transfer(to_record: Transaction) {
     }
     return {success_popup, error_popup};
 }
-//4-update transfer
-export async function update_transfer(to_update: Transaction) {
-    let success_popup: string = "", error_popup: string = "";
-    const intermediate = JSON.stringify(to_update);
-    if (await window.saucer.exposed.update_transfer(intermediate)) {
-        success_popup = "Transfer updated successfully";
-	} else {
-		error_popup = "Failed to update transfer";
-    }
-    return {success_popup, error_popup};
-}
 //5-update record
 export async function update_record(to_update: Transaction) {
     let success_popup: string = "", error_popup: string = "";
