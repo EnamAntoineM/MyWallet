@@ -46,10 +46,10 @@ bool WalletManager::record_transaction(const std::string &to_record)
     sqlite3_bind_text(insertTransactionStmt,   2, to_insert.type.c_str(),                -1, SQLITE_STATIC);
     sqlite3_bind_text(insertTransactionStmt,   3, to_insert.category.c_str(),            -1, SQLITE_STATIC);
     sqlite3_bind_text(insertTransactionStmt,   4, to_insert.description.c_str(),         -1, SQLITE_STATIC);
-    sqlite3_bind_int64(insertTransactionStmt,  5, to_insert.amount);
+    sqlite3_bind_double(insertTransactionStmt,  5, to_insert.amount);
     sqlite3_bind_text(insertTransactionStmt,   6, to_insert.related_wallet_name.c_str(), -1, SQLITE_TRANSIENT);
     //----------------------------------------------------------------------
-    sqlite3_bind_int64(updateWalletStmt, 1, to_insert.amount);
+    sqlite3_bind_double(updateWalletStmt, 1, to_insert.amount);
     sqlite3_bind_text(updateWalletStmt,  2, to_insert.wallet_name.c_str(), -1, SQLITE_STATIC);
 
     if (!(sqlite3_step(insertTransactionStmt) == SQLITE_DONE)) {

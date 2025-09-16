@@ -1,4 +1,3 @@
-<!-- Base layout for the application -->
 <script lang="ts">
 	import "../app.css";
 	import appIcon from "$lib/assets/icon.png?inline";
@@ -195,14 +194,6 @@
 						href="#/allTransactions"
 					>
 						<i class="mr-2 fas fa-exchange-alt"></i> All Transactions</a
-					>
-				</li>
-				<li>
-					<a
-						class="p-5 text-lg text-base-content rounded-2xl transition-all shadow-sm duration-580 drop-shadow-3xl border border-base-300 bg-base-100 font-bold max-w-64 ml-2 hover:text-warning hover:shadow-xl hover:bg-base-200"
-						href="#/statistics"
-					>
-						<i class="mr-2 fas fa-chart-line"></i> Statistics</a
 					>
 				</li>
 				<li>

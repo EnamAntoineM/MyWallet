@@ -12,8 +12,8 @@ struct transaction
     std::string updated_at;
     std::string category;
     std::string description;
-    size_t      amount;
-    bool is_archived;
+    double      amount;
+    double is_archived;
     std::string related_wallet_name;
 };
 

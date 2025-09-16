@@ -25,7 +25,7 @@ std::string WalletManager::get_wallets(void)
         pusher.currency =       safe_column_text    (stmt, 2);
         pusher.source =         safe_column_text    (stmt, 3);
         pusher.initial_amount = sqlite3_column_int  (stmt, 4);
-        pusher.balance =        sqlite3_column_int64(stmt, 5);
+        pusher.balance =        sqlite3_column_double(stmt, 5);
         pusher.color =          safe_column_text    (stmt, 6);
         pusher.created_at =     safe_column_text    (stmt, 7);
         pusher.updated_at =     safe_column_text    (stmt, 8);

@@ -2,11 +2,18 @@
 	import EmmaPic from "$lib/assets/Emma.jpg?inline";
 	import EnamPic from "$lib/assets/Enam.jpg?inline";
 	import JosephPic from "$lib/assets/Joseph.jpg?inline";
+	import MawufemorPic from "$lib/assets/Mawufemor.jpeg?inline";
+	import CliffPic from "$lib/assets/Cliff.jpeg?inline";
+	import MichellePic from "$lib/assets/Michelle.jpeg?inline";
+	import LesliePic from "$lib/assets/Leslie.jpeg?inline"
+	import RichmondNoPic from "$lib/assets/Richmond.jpg?inline"
 	import BgPic from "$lib/assets/Background.jpg?inline";
 </script>
 
-<main class="relative w-full bg-cover bg-center bg-no-repeat min-h-screen"
-	style={`background-image: url(${BgPic});`}>
+<main
+	class="relative w-full bg-cover bg-center bg-no-repeat min-h-screen"
+	style={`background-image: url(${BgPic});`}
+>
 	<div class="absolute inset-0 bg-base-100/80 min-h-screen"></div>
 	<div class="shadow-lg overflow-hidden">
 		<!-- All content sits above the overlay -->
@@ -38,8 +45,28 @@
 					Meet Our Team Members.
 				</p>
 				<div
-					class="grid md:grid-cols-1 md:grid-rows-8 lg:grid-cols-2 lg:grid-rows-4 xl:grid-rows-4 xl:grid-cols-2 2xl:grid-rows-3 2xl:grid-cols-3 gap-4 pt-7 ml-16 justify-center"
+					class="grid md:grid-cols-1 md:grid-rows-8 lg:grid-cols-2 lg:grid-rows-4 xl:grid-rows-4 xl:grid-cols-2 2xl:grid-rows-3 2xl:grid-cols-3 sticky gap-4 pt-7 ml-16 items-center"
 				>
+					<div
+						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
+					>
+						<figure class="relative rounded-2xl min-h-full">
+							<img
+								src={MichellePic}
+								alt="Team member"
+								class="min-h-full object-cover"
+							/>
+							<div
+								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
+							>
+								<h2 class="font-semibold text-lg">
+									SARFO, MICHELLE N. A. ASANTEWAA
+								</h2>
+								<p class="text-sm mt-1">Frontend Developer</p>
+							</div>
+						</figure>
+					</div>
+
 					<div
 						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
 					>
@@ -49,6 +76,10 @@
 								alt="Team member"
 								class="object-cover mt-7"
 							/>
+							<div class="badge badge-soft badge-warning absolute right-6 bottom-24 font-bold p-3">
+								<i class="fa-regular fa-crown"></i>
+								GROUP LEADER
+							</div>
 							<div
 								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
 							>
@@ -56,8 +87,68 @@
 									KODJOH-KPAKPASSOU, ENAM A.-M.
 								</h2>
 								<p class="text-sm mt-1">
-									Full-Stack Developer and Group Leader
+									Full-Stack Developer
 								</p>
+							</div>
+						</figure>
+					</div>
+
+					<div
+						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
+					>
+						<figure class="relative rounded-2xl min-h-full">
+							<img
+								src={MawufemorPic}
+								alt="Team member"
+								class="min-h-full object-cover"
+							/>
+							<div
+								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
+							>
+								<h2 class="font-semibold text-lg">
+									AHIAYIBOR, MAWUFEMOR
+								</h2>
+								<p class="text-sm mt-1">Backend Developer</p>
+							</div>
+						</figure>
+					</div>
+
+					<div
+						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
+					>
+						<figure class="relative rounded-2xl min-h-full">
+							<img
+								src={JosephPic}
+								alt="Team member"
+								class="mt-4 object-cover"
+							/>
+							<div
+								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
+							>
+								<h2 class="font-semibold text-lg">
+									WIAFE, JOSEPH KWAKU
+								</h2>
+								<p class="text-sm mt-1">Frontend Developer</p>
+							</div>
+						</figure>
+					</div>
+
+					<div
+						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
+					>
+						<figure class="relative rounded-2xl min-h-full">
+							<img
+								src={CliffPic}
+								alt="Team member"
+								class="min-h-full object-cover"
+							/>
+							<div
+								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
+							>
+								<h2 class="font-semibold text-lg">
+									AKPA, CLIFF ANUM
+								</h2>
+								<p class="text-sm mt-1">Full-Stack Developer</p>
 							</div>
 						</figure>
 					</div>
@@ -81,34 +172,13 @@
 							</div>
 						</figure>
 					</div>
-					<!-- card 1 -->
-					<div
-						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
-					>
-						<figure class="relative rounded-2xl min-h-full">
-							<img
-								src={JosephPic}
-								alt="Team member"
-								class="mt-4 object-cover"
-							/>
-							<div
-								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
-							>
-								<h2 class="font-semibold text-lg">
-									WIAFE, JOSEPH KWAKU
-								</h2>
-								<p class="text-sm mt-1">Frontend Developer</p>
-							</div>
-						</figure>
-					</div>
 
-					<!-- card 2 -->
 					<div
 						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
 					>
 						<figure class="relative rounded-2xl min-h-full">
 							<img
-								src="https://randomuser.me/api/portraits/women/65.jpg"
+								src={LesliePic}
 								alt="Team member"
 								class="min-h-full object-cover"
 							/>
@@ -123,55 +193,12 @@
 						</figure>
 					</div>
 
-					<!-- card 3 -->
 					<div
 						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
 					>
 						<figure class="relative rounded-2xl min-h-full">
 							<img
-								src="https://randomuser.me/api/portraits/men/74.jpg"
-								alt="Team member"
-								class="min-h-full object-cover"
-							/>
-							<div
-								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
-							>
-								<h2 class="font-semibold text-lg">
-									AHIAYIBOR, MAWUFEMOR
-								</h2>
-								<p class="text-sm mt-1">Backend Developer</p>
-							</div>
-						</figure>
-					</div>
-
-					<!-- card 4 -->
-					<div
-						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
-					>
-						<figure class="relative rounded-2xl min-h-full">
-							<img
-								src="https://randomuser.me/api/portraits/women/24.jpg"
-								alt="Team member"
-								class="min-h-full object-cover"
-							/>
-							<div
-								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
-							>
-								<h2 class="font-semibold text-lg">
-									SARFO, MICHELLE N. A. ASANTEWAA
-								</h2>
-								<p class="text-sm mt-1">Frontend Developer</p>
-							</div>
-						</figure>
-					</div>
-
-					<!-- card 5 -->
-					<div
-						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
-					>
-						<figure class="relative rounded-2xl min-h-full">
-							<img
-								src="https://randomuser.me/api/portraits/men/18.jpg"
+								src={RichmondNoPic}
 								alt="Team member"
 								class="min-h-full object-cover"
 							/>
@@ -181,30 +208,9 @@
 								<h2 class="font-semibold text-lg">
 									WIAFE, RICHMOND KOFI
 								</h2>
-								<p class="text-sm mt-1 text-alert">
+								<p class="text-sm mt-1 text-error font-extrabold">
 									REFUSED TO PARTICIPATE
 								</p>
-							</div>
-						</figure>
-					</div>
-
-					<!-- card 6 -->
-					<div
-						class="card card-sm rounded-2xl bg-base-100 w-96 max-h-100 shadow-sm"
-					>
-						<figure class="relative rounded-2xl min-h-full">
-							<img
-								src="https://randomuser.me/api/portraits/women/56.jpg"
-								alt="Team member"
-								class="min-h-full object-cover"
-							/>
-							<div
-								class="absolute bottom-0 w-90 bg-base-300/90 mb-2 rounded-2xl p-3 text-center"
-							>
-								<h2 class="font-semibold text-lg">
-									AKPA, CLIFF ANUM
-								</h2>
-								<p class="text-sm mt-1">Full-Stack Developer</p>
 							</div>
 						</figure>
 					</div>

@@ -21,8 +21,8 @@ bool WalletManager::create_wallet(const std::string &to_create)
     sqlite3_bind_text(stmt, 1, to_insert.name.c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 2, to_insert.currency.c_str(), -1, SQLITE_STATIC);
     sqlite3_bind_text(stmt, 3, to_insert.source.c_str(), -1, SQLITE_STATIC);
-    sqlite3_bind_int(stmt, 4, to_insert.initial_amount);
-    sqlite3_bind_int(stmt, 5, to_insert.balance);
+    sqlite3_bind_double(stmt, 4, to_insert.initial_amount);
+    sqlite3_bind_double(stmt, 5, to_insert.balance);
     sqlite3_bind_text(stmt, 6, to_insert.color.c_str(), -1, SQLITE_STATIC);
     if (!(sqlite3_step(stmt) == SQLITE_DONE)) {
         std::cerr << "SQL step error: " << sqlite3_errmsg(db) << endl;
