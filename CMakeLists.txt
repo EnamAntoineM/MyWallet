@@ -48,3 +48,35 @@ if (!MSVC)
 endif()
 target_include_directories(${PROJECT_NAME} PRIVATE "embedded")
 target_link_libraries(${PROJECT_NAME} PRIVATE saucer::saucer SQLite::SQLite3)
+
+# ===========================================================
+# CPack packaging (for Windows .zip / .exe installers)
+# ===========================================================
+include(InstallRequiredSystemLibraries)
+
+set(CPACK_PACKAGE_NAME "MyWallet")
+set(CPACK_PACKAGE_VENDOR "Enam Antoine M. Kodjoh-Kpakpassou")
+set(CPACK_PACKAGE_CONTACT "eakodjoh-kpakpassou@st.ug.edu.gh")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Wallet tracker built with Saucer (C++) and Svelte frontend")
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "MyWallet")
+
+# Choose generators:
+if(WIN32)
+    set(CPACK_GENERATOR "ZIP")  # Or "NSIS" if you install NSIS for a real installer
+else()
+    set(CPACK_GENERATOR "TGZ")
+endif()
+
+# Install binary
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+
+# Install frontend assets (adjust if your frontend build folder is different)
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/frontend-dist/"
+        DESTINATION share/mywallet)
+
+# License
+install(FILES "${CMAKE_SOURCE_DIR}/LICENSE"
+        DESTINATION share/licenses/mywallet)
+
+include(CPack)
