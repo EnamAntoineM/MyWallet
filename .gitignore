@@ -10,6 +10,8 @@ node_modules
 /embedded
 /mywallet
 /output
+/_CPack_Packages
+
 
 /build
 /.vscode
