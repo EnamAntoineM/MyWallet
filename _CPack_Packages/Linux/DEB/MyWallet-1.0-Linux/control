@@ -1,0 +1,8 @@
+Architecture: amd64
+Description: Wallet tracker built with Saucer (C++) and Svelte frontend
+Maintainer: eakodjoh-kpakpassou@st.ug.edu.gh
+Package: mywallet
+Priority: optional
+Section: devel
+Version: 1.0
+Installed-Size: 31563
