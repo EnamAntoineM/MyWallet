@@ -9,8 +9,8 @@ struct wallet
     std::string name;
     std::string currency;
     std::string source;
-    size_t      initial_amount;
-    size_t      balance;
+    double      initial_amount;
+    double      balance;
     std::string color;
     std::string created_at;
     std::string updated_at;

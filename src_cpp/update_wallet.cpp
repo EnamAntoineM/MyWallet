@@ -20,11 +20,10 @@ bool WalletManager::update_wallet(const std::string &to_update)
     sqlite3_bind_text(stmt,   1, to_edit.name.c_str() ,    -1 ,SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt,   2, to_edit.currency.c_str() ,-1 ,SQLITE_TRANSIENT);
     sqlite3_bind_text(stmt,   3, to_edit.source.c_str() ,  -1 ,SQLITE_TRANSIENT);
-    sqlite3_bind_int64(stmt,  4, to_edit.initial_amount);
-    sqlite3_bind_int64(stmt,  5, to_edit.balance);
+    sqlite3_bind_double(stmt,  4, to_edit.initial_amount);
+    sqlite3_bind_double(stmt,  5, to_edit.balance);
     sqlite3_bind_text(stmt,   6, to_edit.color.c_str() ,   -1 ,SQLITE_TRANSIENT);
-    sqlite3_bind_int64(stmt,  7, to_edit.id);
-
+    sqlite3_bind_double(stmt,  7, to_edit.id);
     if (!(sqlite3_step(stmt) == SQLITE_DONE)){
         std::cerr << "SQL step error : " << sqlite3_errmsg(db) <<endl;
         goto cleanup;

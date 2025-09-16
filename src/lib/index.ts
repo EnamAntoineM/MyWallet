@@ -34,7 +34,7 @@ export type Transaction = {
     related_wallet_name: string;
     recorded_at: string;
     updated_at: string;
-    is_archived: boolean;
+    is_archived: any;
 }
 export async function refresh() {
     return { wallets: await get_wallets(), records: await get_records() }
@@ -88,9 +88,9 @@ export async function update_record(to_update: Transaction) {
     let success_popup: string = "", error_popup: string = "";
     const intermediate = JSON.stringify(to_update);
     if (await window.saucer.exposed.update_record(intermediate)) {
-        success_popup = "Record updated successfully";
+        success_popup = "Transaction updated successfully";
 	} else {
-		error_popup = "Failed to update record";
+		error_popup = "Failed to update transaction";
     }
     return {success_popup, error_popup};
 }

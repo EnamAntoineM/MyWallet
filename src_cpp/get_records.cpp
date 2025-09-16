@@ -21,8 +21,8 @@ std::string WalletManager::get_records(void)
         helper.updated_at          = reinterpret_cast<const char*>(sqlite3_column_text (fetchStmt, 4));
         helper.category            = reinterpret_cast<const char*>(sqlite3_column_text (fetchStmt, 5));
         helper.description         = reinterpret_cast<const char*>(sqlite3_column_text (fetchStmt, 6));
-        helper.amount              =                               sqlite3_column_int64(fetchStmt, 7);
-        helper.is_archived         =                               sqlite3_column_int64(fetchStmt, 8);
+        helper.amount              =                               sqlite3_column_double(fetchStmt, 7);
+        helper.is_archived         =                               sqlite3_column_int(fetchStmt, 8);
         helper.related_wallet_name = reinterpret_cast<const char*>(sqlite3_column_text (fetchStmt, 9));
         transactionsList.push_back(helper);
     }

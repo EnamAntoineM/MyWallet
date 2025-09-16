@@ -9,6 +9,7 @@
 #include "transaction.h"
 #include "filesystem"
 #include "glaze/glaze.hpp"
+#include "cctype"
 
 using std::cout;
 using std::endl;

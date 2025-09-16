@@ -8,10 +8,10 @@ bool WalletManager::record_transfer(const std::string &to_record)
     sqlite3_stmt *withdraw_WalletStmt = nullptr;
     sqlite3_stmt *incomeWalletStmt = nullptr;
     const char *createSQL = "INSERT INTO transactions "
-                    "(wallet_name, type, recorded_at, "
-                    "updated_at, category, description, "
+                    "(wallet_name, type, "
+                    "category, description, "
                     "amount, related_wallet_name) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?);"
+                    "VALUES (?, ?, ?, ?, ?, ?);"
     ;
     const char *incomeWalletSQL = "UPDATE wallets SET balance = balance + ?  WHERE name = ?;";
     const char *withdraw_WalletSQL = "UPDATE wallets SET balance = balance - ? WHERE name = ?;";
@@ -42,17 +42,15 @@ bool WalletManager::record_transfer(const std::string &to_record)
 
     sqlite3_bind_text(insertTransferStmt,   1,trans_insert.wallet_name.c_str(),         -1, SQLITE_TRANSIENT);
     sqlite3_bind_text(insertTransferStmt,   2,trans_insert.type.c_str(),                -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(insertTransferStmt,   3,trans_insert.recorded_at.c_str(),         -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(insertTransferStmt,   4,trans_insert.updated_at.c_str(),          -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(insertTransferStmt,   5,trans_insert.category.c_str(),            -1, SQLITE_TRANSIENT);
-    sqlite3_bind_text(insertTransferStmt,   6,trans_insert.description.c_str(),         -1, SQLITE_TRANSIENT);
-    sqlite3_bind_int64(insertTransferStmt,  7,trans_insert.amount);
-    sqlite3_bind_text (insertTransferStmt,   8,trans_insert.related_wallet_name.c_str(), -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(insertTransferStmt,   3,trans_insert.category.c_str(),            -1, SQLITE_TRANSIENT);
+    sqlite3_bind_text(insertTransferStmt,   4,trans_insert.description.c_str(),         -1, SQLITE_TRANSIENT);
+    sqlite3_bind_double(insertTransferStmt,  5,trans_insert.amount);
+    sqlite3_bind_text (insertTransferStmt,   6,trans_insert.related_wallet_name.c_str(), -1, SQLITE_TRANSIENT);
     //
-    sqlite3_bind_int64(incomeWalletStmt, 1, trans_insert.amount);
+    sqlite3_bind_double(incomeWalletStmt, 1, trans_insert.amount);
     sqlite3_bind_text(incomeWalletStmt, 2, trans_insert.related_wallet_name.c_str(), -1, SQLITE_TRANSIENT);
     //
-    sqlite3_bind_int64(withdraw_WalletStmt, 1, trans_insert.amount);
+    sqlite3_bind_double(withdraw_WalletStmt, 1, trans_insert.amount);
     sqlite3_bind_text(withdraw_WalletStmt, 2, trans_insert.wallet_name.c_str(), -1, SQLITE_TRANSIENT);
 
     if (!(sqlite3_step(insertTransferStmt) == SQLITE_DONE)) {
