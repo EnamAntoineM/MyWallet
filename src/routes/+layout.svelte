@@ -3,7 +3,21 @@
 	import appIcon from "$lib/assets/icon.png?inline";
 	import userPic from "$lib/assets/userPic.png?inline";
 	import appLogo from "$lib/assets/logo.png?inline";
+	import { logout, refresh, delete_wallet } from "$lib/index";
+	import { onMount } from "svelte";
+	import { goto } from "$app/navigation";
+	import type { Wallet, Transaction } from "$lib/index";
 
+	let fetched_wallets: Wallet[] = $state([]);
+	let fetched_transactions: Transaction[] = $state([]);
+	let showProfile: boolean = $state(false);
+
+	onMount(async () => refresh_wrap());
+	async function refresh_wrap() {
+		const { wallets, records } = await refresh();
+		fetched_wallets = wallets;
+		fetched_transactions = records;
+	}
 	const themes = [
 		"light",
 		"dark",
@@ -41,12 +55,47 @@
 		"abyss",
 		"silk",
 	];
-
+	let { fName, lName, email, avatar } = JSON.parse(
+		localStorage.getItem("user") ?? "{}"
+	);
 	let { children } = $props();
 	let marginleft: number = 5;
 	let active: boolean = $state(true);
+	let reset: boolean = $state(false);
+	let deployDrawer: boolean = $state(false);
 	function onToggle() {
 		active = !active;
+	}
+	let currentTheme = $state("light");
+	onMount(() => {
+		if (typeof window !== "undefined") {
+			const savedTheme = localStorage.getItem("app-theme") || "light";
+			currentTheme = savedTheme;
+			document.documentElement.setAttribute("data-theme", savedTheme);
+		}
+		if (
+			!localStorage.getItem("isLoggedIn") ||
+			!localStorage.getItem("user")
+		) {
+			goto("#/signUp");
+		} else {
+			deployDrawer = true;
+		}
+	});
+	function handleThemeChange(theme: string) {
+		currentTheme = theme;
+		if (typeof window !== "undefined") {
+			document.documentElement.setAttribute("data-theme", theme);
+			localStorage.setItem("app-theme", theme);
+		}
+	}
+	async function resetApplication() {
+		localStorage.clear();
+		for (let i = 0; i < fetched_wallets.length; i++) {
+			await delete_wallet(fetched_wallets[i]);
+		}
+		window.location.hash = "#/signUp";
+		window.location.reload();
 	}
 </script>
 
@@ -69,13 +118,18 @@
 			>
 				<div class="flex-1 bg-base-100">
 					<div class="flex max-w-56 bg-base-100">
-						<label
-							for="my-drawer"
-							class="border-base-300 btn transition-all hover:shadow-lg bg-base-100 text-base-content duration-580 rounded-xl hover:bg-base-200 btn-ghost drawer-button"
+						{#if deployDrawer}
+							<label
+								for="my-drawer"
+								class="border-base-300 btn transition-all hover:shadow-lg bg-base-100 text-base-content duration-580 rounded-xl hover:bg-base-200 btn-ghost drawer-button"
+							>
+								<i class="fa-solid fa-bars"></i>
+							</label>
+						{/if}
+						<a
+							href={deployDrawer ? "/#" : "#/signUp"}
+							class="font-bold"
 						>
-							<i class="fa-solid fa-bars"></i>
-						</label>
-						<a href="#/" class="font-bold">
 							<img
 								alt="Application logo"
 								src={appLogo}
@@ -112,6 +166,7 @@
 									class="theme-controller w-full btn btn-sm btn-ghost justify-start"
 									aria-label={t.charAt(0).toUpperCase() +
 										t.slice(1)}
+									onchange={() => handleThemeChange(t)}
 									value={t}
 								/>
 							</li>
@@ -133,31 +188,86 @@
 						<ul
 							class="menu gap-y-1 menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-4 shadow-sm drop-shadow-2xl"
 						>
-							<li>
-								<button
-									class="p-4 text-lg text-base-content border border-base-300 bg-base-100 font-bold rounded-2xl shadow-sm transition-all duration-580 hover:text-warning hover:shadow-xl hover:bg-base-200"
-									>Profile</button
-								>
-							</li>
-							<li>
-								<button
-									class="p-4 text-lg text-base-content border border-base-300 bg-base-100 font-bold rounded-2xl shadow-sm transition-all duration-580 hover:text-warning hover:shadow-xl hover:bg-base-200"
-									>Settings</button
-								>
-							</li>
-							<li>
-								<button
-									class="p-4 text-lg text-base-content border border-base-300 bg-base-100 font-bold rounded-2xl shadow-sm transition-all duration-580 hover:text-warning hover:shadow-xl hover:bg-base-200"
-									>Logout</button
-								>
-							</li>
+							{#if deployDrawer}
+								<li>
+									<button
+										onclick={() => (showProfile = true)}
+										class="p-4 text-lg text-base-content border border-base-300 bg-base-100 font-bold rounded-2xl shadow-sm transition-all duration-580 hover:text-warning hover:shadow-xl hover:bg-base-200"
+										>Profile</button
+									>
+								</li>
+								<li>
+									<button
+										class="p-4 text-lg text-base-content border border-base-300 bg-base-100 font-bold rounded-2xl shadow-sm transition-all duration-580 hover:text-warning hover:shadow-xl hover:bg-base-200"
+										onclick={() => (
+											logout(), window.location.reload()
+										)}>Logout</button
+									>
+								</li>
+							{:else}
+								<li>
+									<button
+										class="p-4 text-lg text-base-content border border-base-300 bg-base-100 font-bold rounded-2xl shadow-sm transition-all duration-580 hover:text-error hover:shadow-xl hover:bg-base-200"
+										onclick={() => (reset = true)}
+										>RESET!</button
+									>
+								</li>
+							{/if}
 						</ul>
 					</div>
 				</div>
 			</div>
+			{#if showProfile}
+				<div class="modal modal-open">
+					<div class="modal-box flex flex-col relative">
+						<div class="flex flex-1 gap-12">
+							<div class="avatar">
+								<div class="w-24 rounded-xl">
+									<img alt="User profile" src={userPic} />
+								</div>
+							</div>
+							<div class="text-center mt-4">
+								<h2 class="text-2xl font-bold">
+									{fName}
+									{lName}
+								</h2>
+								<p class="mt-2 text-primary font-semibold">
+									{email}
+								</p>
+							</div>
+						</div>
+						<button
+							class="btn ml-auto p-4 text-lg rounded-2xl hover:bg-error/70"
+							onclick={() => (showProfile = false)}>Close</button
+						>
+					</div>
+				</div>
+			{/if}
+			{#if reset}
+				<div class="modal modal-open">
+					<div class="modal-box">
+						<h3 class="font-extrabold text-2xl text-error">
+							Confirm Reset
+						</h3>
+						<p class="py-4">
+							⚠️ This will permanently delete your account and all
+							data. Are you sure you want to continue?
+						</p>
+						<div class="modal-action mt-0">
+							<button
+								class="btn btn-error"
+								onclick={resetApplication}>Yes, Reset</button
+							>
+							<button class="btn" onclick={() => (reset = false)}
+								>Cancel</button
+							>
+						</div>
+					</div>
+				</div>
+			{/if}
 
 			<div
-				class="transition-all duration-400 p-2 bg-base-100"
+				class="transition-all duration-400 bg-base-100"
 				class:ml-[320px]={!active}
 				class:ml-[0px]={active}
 			>

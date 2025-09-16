@@ -460,7 +460,7 @@
 				<tbody class="divide-y divide-base-300">
 					{#each fetched_transactions.filter(transaction => !transaction.is_archived) as transaction (transaction.id)}
 						<tr
-							class="hover:bg-base-100 bg-base-100 border-b rounded-b-4xl border-b-base-content/20 transition-colors"
+							class="hover:bg-base-100 bg-base-200 border-b rounded-b-4xl border-b-base-content/20 transition-colors"
 						>
 							<td class="px-6 py-3 text-sm text-base-content">
 								{format_date(transaction.recorded_at)}

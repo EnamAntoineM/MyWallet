@@ -149,3 +149,35 @@ export async function delete_record(to_delete: Transaction) {
     }
     return {success_popup, error_popup};
 }
+
+export function signUp(fName: string, lName: string, password: string, email: string) {
+    const user = localStorage.getItem("user");
+	if (user) {
+		return false;
+	}
+    const newUser = {fName, lName, password, email};
+    localStorage.setItem("user", JSON.stringify(newUser));
+    localStorage.setItem("isLoggedIn", "true");
+    return true;
+}
+
+export function login(email: string, password: string) {
+    const user = localStorage.getItem("user");
+    if (!user) return false;
+    const {fName: SavedFN, lName: SavedLN, password: SavedPWD, email: SavedEM} = JSON.parse(user)
+    if (email === SavedEM && password === SavedPWD) {
+        localStorage.setItem("isLoggedIn", "true");
+        return true;
+    }
+    return false;
+}
+
+export function updateUserCredentials(fName: string, lName: string, password: string, email: string) {
+    const newUser = {fName, lName, password, email};
+    localStorage.setItem("user", JSON.stringify(newUser));
+    return true;
+}
+
+export function logout() {
+    localStorage.removeItem("isLoggedIn");
+}
