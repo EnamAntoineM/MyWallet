@@ -60,12 +60,6 @@ sqlite3 *WalletManager::init_db(void)
     #if _WIN32
         appdata = std::getenv("APPDATA");
         dbPath1 = appdata ? fs::path(appdata) : fs::temp_directory_path();
-
-        char *localapp = std::getenv("LOCALAPPDATA");
-        fs::path saucerPath = localapp ? fs::path(localapp) / "myWallet" : fs::temp_directory_path();
-
-        saucer::config cfg;
-        cfg.data_directory = saucerPath.string();
     #else
         home = std::getenv("HOME");
         dbPath1 = home ? fs::path(home) / ".local" / "share" : fs::temp_directory_path();
