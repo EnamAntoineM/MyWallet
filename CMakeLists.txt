@@ -95,24 +95,43 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Wallet tracker built with Saucer (C++) an
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "MyWallet")
 
-# Add license agreement
+# License shown during NSIS install
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
 
 if (WIN32)
+    # Generate both ZIP archive and NSIS installer
     set(CPACK_GENERATOR "ZIP;NSIS")
+
+    # NSIS settings
     set(CPACK_NSIS_DISPLAY_NAME "MyWallet")
     set(CPACK_NSIS_HELP_LINK "https://github.com/saucer/saucer")
     set(CPACK_NSIS_URL_INFO_ABOUT "https://github.com/saucer/saucer")
     set(CPACK_NSIS_CONTACT "${CPACK_PACKAGE_CONTACT}")
     set(CPACK_NSIS_MODIFY_PATH ON)
+
+    # Installer icon
     set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/src/lib/assets/icon.ico")
     set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/src/lib/assets/icon.ico")
+
+    # Start Menu shortcut (points to installed exe in $INSTDIR)
+    set(CPACK_NSIS_MENU_LINKS "myWallet.exe" "MyWallet")
+
+    # Desktop shortcut (optional)
+    set(CPACK_NSIS_CREATE_ICONS_EXTRA
+        "CreateShortCut \\\"$DESKTOP\\\\MyWallet.lnk\\\" \\\"$INSTDIR\\\\myWallet.exe\\\"")
+    set(CPACK_NSIS_DELETE_ICONS_EXTRA
+        "Delete \\\"$DESKTOP\\\\MyWallet.lnk\\\"")
+
 elseif(APPLE)
+    # macOS: DMG disk image
     set(CPACK_GENERATOR "DragNDrop")
     set(CPACK_DMG_VOLUME_NAME "MyWallet")
+    # Optional background image for DMG
+    # set(CPACK_DMG_BACKGROUND_IMAGE "${CMAKE_SOURCE_DIR}/src/lib/assets/dmg-background.png")
+
 else()
+    # Linux / Arch: simple tarball
     set(CPACK_GENERATOR "TGZ")
 endif()
 
 include(CPack)
-
