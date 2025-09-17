@@ -196,7 +196,7 @@
 	}
 </script>
 
-<main class="min-h-screen p-6 mx-auto space-y-6 bg-base-100 text-base-content">
+<main class="min-h-screen p-6 mx-auto space-y-6 bg-base-100 text-base-content bg-gradient-to-br from-base-200 to-base-content/10">
 	<div>
 		{#if success_popup}<div class="alert alert-success">
 				{success_popup}

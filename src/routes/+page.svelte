@@ -33,7 +33,7 @@
 	}
 </script>
 
-<main class="mt-3">
+<main class="pt-3 bg-gradient-to-br from-base-200 to-base-content/10 min-h-screen">
 	<h1 class="font-extrabold text-4xl p-6 text-base-content">Overview</h1>
 	<div class="flex flex-col gap-y-3">
 		<div
@@ -44,22 +44,105 @@
 				{#each fetched_wallets.filter((wallet) => wallet.is_active === true) as wallet (wallet.id)}
 					<a href="#/allWallets">
 						<div
-							class="card !bg-primary/60 text-primary-content w-80 h-40"
+							class="relative min-w-80 p-6 rounded-2xl backdrop-blur-sm bg-base-200/70 border border-base-300 shadow-xl hover:shadow-2xl transition-all duration-300 hover:bg-base-100"
 						>
-							<div class="card-body">
-								<div class="flex">
-									<i class="fa-solid fa-magnet text-xl"></i>
-									<h2
-										class="card-title ml-auto mr-6 font-extrabold text-2xl"
+							<!-- Header with icon and wallet info -->
+							<div class="flex items-center gap-3 mb-4">
+								<div
+									class="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm border border-base-300"
+									style="background-color: {wallet.color}20;"
+								>
+									<!-- Wallet Icon -->
+									<svg
+										class="w-6 h-6"
+										style="color: {wallet.color};"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+										/>
+									</svg>
+								</div>
+								<div>
+									<h4
+										class="font-bold text-base-content text-lg"
 									>
 										{wallet.name}
-									</h2>
-								</div>
-								<div class="mt-6 flex font-semibold">
-									<p class="text-3xl">
-										{wallet.currency}
-										{wallet.balance}
+									</h4>
+									<p class="text-sm text-base-content/80">
+										{wallet.source} • {wallet.currency}
 									</p>
+								</div>
+							</div>
+
+							<!-- Balance Display -->
+							<div class="ml-4 mb-4">
+								<div class="flex items-baseline gap-1">
+									<span
+										class="text-3xl font-bold text-base-content"
+									>
+										{wallet.balance + "  " + wallet.currency}
+									</span>
+								</div>
+								<div class="flex items-center gap-2 mt-2">
+									<!-- Trending up/down icon -->
+									<svg
+										class="w-4 h-4 {wallet.balance >=
+										wallet.initial_amount
+											? 'text-success'
+											: 'text-error'}"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										{#if wallet.balance >= wallet.initial_amount}
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+											/>
+										{:else}
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
+											/>
+										{/if}
+									</svg>
+									<span
+										class="text-sm {wallet.balance >=
+										wallet.initial_amount
+											? 'text-success'
+											: 'text-error'}"
+									>
+										{wallet.balance >= wallet.initial_amount
+											? "+"
+											: ""}
+										{wallet.balance - wallet.initial_amount}
+										{wallet.currency + " "} from initial
+									</span>
+								</div>
+							</div>
+							<div class="mt-4 pt-3 border-t border-base-content/10">
+								<div
+									class="flex justify-between text-xs text-base-content/80"
+								>
+									<span>
+										Initial amount:
+										{wallet.currency === "USD"
+											? "$"
+											: ""}{wallet.initial_amount.toLocaleString()}{wallet.currency !==
+										"USD"
+											? ` ${wallet.currency}`
+											: ""}
+									</span>
 								</div>
 							</div>
 						</div>

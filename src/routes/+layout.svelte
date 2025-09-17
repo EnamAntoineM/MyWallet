@@ -59,7 +59,6 @@
 		localStorage.getItem("user") ?? "{}"
 	);
 	let { children } = $props();
-	let marginleft: number = 5;
 	let active: boolean = $state(true);
 	let reset: boolean = $state(false);
 	let deployDrawer: boolean = $state(false);
@@ -268,7 +267,7 @@
 
 			<div
 				class="transition-all duration-400 bg-base-100"
-				class:ml-[320px]={!active}
+				class:ml-[300px]={!active}
 				class:ml-[0px]={active}
 			>
 				{@render children?.()}

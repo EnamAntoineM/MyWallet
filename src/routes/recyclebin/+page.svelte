@@ -57,7 +57,7 @@
 	}
 </script>
 
-<main class="mt-6">
+<main class="pt-6 bg-gradient-to-br from-base-200 to-base-content/10 min-h-screen">
 	<div>
 		{#if success_popup}<div class="alert alert-success">
 				{success_popup}
