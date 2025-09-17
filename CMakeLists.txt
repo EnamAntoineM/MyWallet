@@ -95,31 +95,24 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Wallet tracker built with Saucer (C++) an
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "MyWallet")
 
-if (WIN32)
-    # Generate NSIS installer
-    set(CPACK_GENERATOR "NSIS")
+# Add license agreement
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
 
-    # Optional: NSIS-specific settings
+if (WIN32)
+    set(CPACK_GENERATOR "ZIP;NSIS")
     set(CPACK_NSIS_DISPLAY_NAME "MyWallet")
     set(CPACK_NSIS_HELP_LINK "https://github.com/saucer/saucer")
     set(CPACK_NSIS_URL_INFO_ABOUT "https://github.com/saucer/saucer")
     set(CPACK_NSIS_CONTACT "${CPACK_PACKAGE_CONTACT}")
     set(CPACK_NSIS_MODIFY_PATH ON)
-
-    # Installer icon
     set(CPACK_NSIS_MUI_ICON "${CMAKE_SOURCE_DIR}/src/lib/assets/icon.ico")
     set(CPACK_NSIS_MUI_UNIICON "${CMAKE_SOURCE_DIR}/src/lib/assets/icon.ico")
-
 elseif(APPLE)
-    # macOS: DMG disk image
     set(CPACK_GENERATOR "DragNDrop")
     set(CPACK_DMG_VOLUME_NAME "MyWallet")
-    set(CPACK_DMG_BACKGROUND_IMAGE "${CMAKE_SOURCE_DIR}/src/lib/assets/dmg-background.png") # optional
-    set(CPACK_DMG_DS_STORE_SETUP_SCRIPT "${CMAKE_SOURCE_DIR}/dmg_dsstore_setup.scpt")       # optional advanced customization
-
 else()
-    # Linux / Arch: simple tarball
     set(CPACK_GENERATOR "TGZ")
 endif()
 
 include(CPack)
+
