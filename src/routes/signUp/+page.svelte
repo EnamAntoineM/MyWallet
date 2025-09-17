@@ -440,7 +440,7 @@
 		<!-- DaisyUI Modal -->
 		<input type="checkbox" id="license_modal" class="modal-toggle" />
 		<div class="modal">
-			<div class="modal-box max-w-3xl p-6 pb-0">
+			<div class="modal-box flex flex-col flex-fit mt-12 max-w-3xl p-6 pb-0">
 				<header
 					class="text-center border-b border-base-100 pt-6 pb-3 mb-8"
 				>
@@ -449,7 +449,7 @@
 					</h1>
 				</header>
 
-				<div class="flex-1 pb-8">
+				<div class="flex flex-col pb-8">
 					<p class="font-semibold text-base-content text-center mb-3">
 						© {copyrightYear}
 						{companyName}. All rights reserved.

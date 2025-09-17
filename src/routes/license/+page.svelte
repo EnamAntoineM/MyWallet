@@ -10,10 +10,10 @@
 </script>
 
 <div
-	class="flex w-full min-h-full justify-center items-center flex-col lg:pt-17 2xl:pt-35"
+	class="flex w-full bg-gradient-to-br from-base-200 to-base-content/10 min-h-screen justify-center items-center flex-col lg:pt-17 2xl:pt-35"
 >
 	<div
-		class="flex-1 max-w-3xl w-full mx-auto p-6 bg-base-100 rounded-lg shadow-2xl my-6 flex flex-col"
+		class="flex max-w-3xl flex-fit w-full mx-auto p-6 bg-base-100 rounded-lg shadow-2xl my-6 flex flex-col"
 	>
 		<header class="text-center border-b border-base-100 pt-6 pb-6 mb-8">
 			<h1

@@ -14,7 +14,7 @@
 	class="relative w-full bg-cover bg-center bg-no-repeat min-h-screen"
 	style={`background-image: url(${BgPic});`}
 >
-	<div class="absolute inset-0 bg-base-100/80 min-h-screen"></div>
+	<div class="absolute inset-0 bg-gradient-to-br from-base-200 to-base-300/43 min-h-screen"></div>
 	<div class="shadow-lg overflow-hidden">
 		<!-- All content sits above the overlay -->
 		<div class="relative z-10 mt-16 mb-10">
@@ -76,7 +76,7 @@
 								alt="Team member"
 								class="object-cover mt-7"
 							/>
-							<div class="badge badge-soft badge-warning absolute right-6 bottom-24 font-bold p-3">
+							<div class="badge badge-soft badge-lg badge-warning absolute right-6 bottom-23 font-extrabold p-4">
 								<i class="fa-regular fa-crown"></i>
 								GROUP LEADER
 							</div>
