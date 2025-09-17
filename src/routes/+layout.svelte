@@ -8,11 +8,16 @@
 	import { goto } from "$app/navigation";
 	import type { Wallet, Transaction } from "$lib/index";
 
+	let profilePic: string = $state("");
 	let fetched_wallets: Wallet[] = $state([]);
 	let fetched_transactions: Transaction[] = $state([]);
 	let showProfile: boolean = $state(false);
 
-	onMount(async () => refresh_wrap());
+	onMount(async () => {
+		refresh_wrap();
+		const savedPP = localStorage.getItem("ProfilePic");
+		if (savedPP) profilePic = savedPP;
+	});
 	async function refresh_wrap() {
 		const { wallets, records } = await refresh();
 		fetched_wallets = wallets;
@@ -96,6 +101,17 @@
 		window.location.hash = "#/signUp";
 		window.location.reload();
 	}
+	function changeProfilePicture(event: Event) {
+		const file = (event.target as HTMLInputElement).files?.[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = () => {
+				profilePic = reader.result as string;
+				localStorage.setItem("ProfilePic", profilePic);
+			};
+			reader.readAsDataURL(file);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -172,7 +188,6 @@
 						{/each}
 					</ul>
 				</div>
-
 				<div class="mr-6">
 					<div class="dropdown dropdown-end">
 						<div
@@ -181,7 +196,10 @@
 							class="btn btn-ghost focus:outline-none focus:shadow-2xl focus:ring btn-circle avatar focus:ring-warning"
 						>
 							<div class="w-24 rounded-full">
-								<img alt="User Profile" src={userPic} />
+								<img
+									alt="User Profile"
+									src={profilePic || userPic}
+								/>
 							</div>
 						</div>
 						<ul
@@ -218,11 +236,14 @@
 			</div>
 			{#if showProfile}
 				<div class="modal modal-open">
-					<div class="modal-box flex flex-col relative">
-						<div class="flex flex-1 gap-12">
+					<div class="modal-box flex p-7 flex-col relative">
+						<div class="flex flex-1 pt-3 gap-12">
 							<div class="avatar">
-								<div class="w-24 rounded-xl">
-									<img alt="User profile" src={userPic} />
+								<div class="w-30 rounded-xl">
+									<img
+										alt="User profile"
+										src={profilePic || userPic}
+									/>
 								</div>
 							</div>
 							<div class="text-center mt-4">
@@ -235,6 +256,12 @@
 								</p>
 							</div>
 						</div>
+						<input
+							type="file"
+							accept="image/*"
+							onchange={changeProfilePicture}
+							class="file-input mt-3 file-input-bordered file-input-xs w-24 rounded-2xl"
+						/>
 						<button
 							class="btn ml-auto p-4 text-lg rounded-2xl hover:bg-error/70"
 							onclick={() => (showProfile = false)}>Close</button

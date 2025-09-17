@@ -2,6 +2,7 @@
 	import type { Wallet, Transaction } from "$lib/index";
 	import { refresh } from "$lib/index";
 	import { onMount } from "svelte";
+	import { goto } from "$app/navigation";
 
 	let fetched_wallets: Wallet[] = $state([]);
 	let fetched_transactions: Transaction[] = $state([]);
@@ -208,7 +209,7 @@
 						<tbody class="divide-y divide-base-300">
 							{#each fetched_transactions.filter((transaction) => transaction.is_archived === 0).slice(-15) as transaction (transaction.id)}
 								<tr
-									class="hover:bg-base-100 bg-base-200 border-b rounded-b-4xl border-b-base-content/20 transition-colors" onclick={() => window.location.hash = '#/allTransactions'}
+									class="hover:bg-base-100 bg-base-200 border-b rounded-b-4xl border-b-base-content/20 transition-colors" onclick={() => goto('#/allTransactions')}
 								>
 									<td
 										class="px-6 py-3 text-sm text-base-content"
