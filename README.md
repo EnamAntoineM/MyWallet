@@ -31,7 +31,10 @@ A cross-platform, lightweight finance management desktop application that blends
   - ⚠️ If you forget your password after logging out, you will need to **reset the application**, which erases all your data. To avoid this, remember your password carefully — or simply never log out.  
 
 - A built-in **theme switcher** lets you personalize the app’s appearance to match your preferences.  
+---
 
+## DATABASE SCHEMA
+<img width="1159" height="665" alt="Screenshot From 2025-09-18 10-36-07" src="https://github.com/user-attachments/assets/c9900d3f-dd08-4f60-88b5-406012810bdf" />
 
 ## 🚀 Get Started
 
