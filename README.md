@@ -166,3 +166,6 @@ cd build
 
 ## 👥 Contributors
 [![Contributors](https://contrib.rocks/image?repo=EnamAntoineM/MyWallet)](https://github.com/EnamAntoineM/MyWallet/graphs/contributors)
+
+
+<img width="1200" height="512" alt="Commits over time" src="https://github.com/user-attachments/assets/fac3df3c-b91c-49ef-b291-d0f6937e08c4" />
