@@ -33,6 +33,13 @@
 	let selectedType: string = $state("Select a type");
 	const currencies = [
 		"USD", // US Dollar
+		"GHS", // Ghana
+		"FCFA",
+		"NGN",
+		"AED",
+		"AFN",
+		"ALL",
+		"AMD",
 		"EUR", // Euro
 		"JPY", // Japanese Yen
 		"GBP", // British Pound
