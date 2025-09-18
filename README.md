@@ -6,6 +6,33 @@ A cross-platform, lightweight finance management desktop application that blends
 
 <img width="1920" height="1080" alt="Screenshot From 2025-09-18 03-54-28" src="https://github.com/user-attachments/assets/5a109c4b-d63d-4978-8ac7-cb9ddfff9880" />
 
+## 📖 What Does It Do?
+
+**MyWallet** allows you to easily monitor your capital flow.  
+
+- You can create **wallets** that represent your different resources.  
+  - Each wallet has a **name**, **currency**, **type**, **initial amount**, **current balance**, and even a customizable **color** for aesthetics.  
+
+- Within each wallet, you can record both **incomes** and **expenses**.  
+  - Each transaction includes a **category**, a **type** (income or expense), an **amount**, and an optional **description**.  
+
+- Starting with two wallets, you can perform **transfers** between them.  
+  - ⚠️ Both wallets must use the **same currency** for a transfer to work.  
+
+- You can **archive** wallets you no longer need.  
+  - Archived wallets are moved to the **Recycle Bin**, where you can choose to either **restore** them or **permanently delete** them.  
+  - Deleting a wallet also deletes **all associated transactions**.  
+
+- Both wallets and individual transactions can be **edited** or **deleted** at any time.  
+
+- The app features an **offline login system** to enforce security.  
+  - You can **log out** after finishing your session.  
+  - You can also change your **profile picture**.  
+  - ⚠️ If you forget your password after logging out, you will need to **reset the application**, which erases all your data. To avoid this, remember your password carefully — or simply never log out.  
+
+- A built-in **theme switcher** lets you personalize the app’s appearance to match your preferences.  
+
+
 ## 🚀 Get Started
 
 ### 🐧 Fedora (Tested on Fedora 42 — Fresh Install)
@@ -135,33 +162,6 @@ cd build
 ./myWallet
 ```
 ---
-
-## 📖 What Does It Do?
-
-**MyWallet** allows you to easily monitor your capital flow.  
-
-- You can create **wallets** that represent your different resources.  
-  - Each wallet has a **name**, **currency**, **type**, **initial amount**, **current balance**, and even a customizable **color** for aesthetics.  
-
-- Within each wallet, you can record both **incomes** and **expenses**.  
-  - Each transaction includes a **category**, a **type** (income or expense), an **amount**, and an optional **description**.  
-
-- Starting with two wallets, you can perform **transfers** between them.  
-  - ⚠️ Both wallets must use the **same currency** for a transfer to work.  
-
-- You can **archive** wallets you no longer need.  
-  - Archived wallets are moved to the **Recycle Bin**, where you can choose to either **restore** them or **permanently delete** them.  
-  - Deleting a wallet also deletes **all associated transactions**.  
-
-- Both wallets and individual transactions can be **edited** or **deleted** at any time.  
-
-- The app features an **offline login system** to enforce security.  
-  - You can **log out** after finishing your session.  
-  - You can also change your **profile picture**.  
-  - ⚠️ If you forget your password after logging out, you will need to **reset the application**, which erases all your data. To avoid this, remember your password carefully — or simply never log out.  
-
-- A built-in **theme switcher** lets you personalize the app’s appearance to match your preferences.  
-
 ---
 
 ## 👥 Contributors
